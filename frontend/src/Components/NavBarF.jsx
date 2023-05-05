@@ -11,7 +11,7 @@ import { FiUser} from 'react-icons/fi';
     const { isOpen, onToggle } = useDisclosure();
   
     return (
-      <Box top={0} bottom={0} position={'sticky'} zIndex={99}>
+      <Box position='sticky' top='0' bottom='0' marginTop={'-2px'} borderTop={'1px solid grey'} zIndex={'1'}>
         <Flex 
           bg={'white'}
           color={useColorModeValue('gray.600', 'white')}

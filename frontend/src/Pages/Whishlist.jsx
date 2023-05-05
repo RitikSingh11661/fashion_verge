@@ -1,7 +1,12 @@
-import React from 'react'
+import { Box, Text } from "@chakra-ui/react";
+import React from "react";
 
-export const whishlist = () => {
+const Whishlist = () => {
   return (
-    <div>whishlist</div>
-  )
-}
+    <Box>
+      <Text fontSize={"2xl"} fontWeight={"semibold"}>Wishlist</Text>
+    </Box>
+  );
+};
+
+export default Whishlist;

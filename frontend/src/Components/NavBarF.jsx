@@ -11,9 +11,9 @@ import { FiUser} from 'react-icons/fi';
     const { isOpen, onToggle } = useDisclosure();
   
     return (
-      <Box >
-        <Flex
-          bg={useColorModeValue('white', 'gray.800')}
+      <Box top={0} bottom={0} position={'sticky'} zIndex={99}>
+        <Flex 
+          bg={'white'}
           color={useColorModeValue('gray.600', 'white')}
           minH={'60px'}
           py={{ base: 2 }}
@@ -29,9 +29,9 @@ import { FiUser} from 'react-icons/fi';
             <IconButton
               onClick={onToggle}
               icon={
-                isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
+                isOpen ? <CloseIcon w={3} h={3} color={'black'} border={'0px solid red'} /> : <HamburgerIcon color={'black'} border={'0px solid red'} w={5} h={5} />
               }
-              variant={'ghost'}
+              variant={'black'}
               aria-label={'Toggle Navigation'}
             />
           </Flex>
@@ -51,6 +51,7 @@ import { FiUser} from 'react-icons/fi';
               as={'a'}
               fontSize={'xl'}
               fontWeight={400}
+              color={'black'}
               variant={'link'}
               href={'#'}>
               <FiUser/>
@@ -79,8 +80,8 @@ import { FiUser} from 'react-icons/fi';
   }
   
   const DesktopNav = () => {
-    const linkColor = useColorModeValue('gray.600', 'gray.200');
-    const linkHoverColor = useColorModeValue('gray.800', 'white');
+    const linkColor = useColorModeValue('gray.600', 'black');
+    const linkHoverColor = useColorModeValue('black', 'black');
     const popoverContentBgColor = useColorModeValue('white', 'gray.800');
   
     return (
@@ -162,7 +163,7 @@ import { FiUser} from 'react-icons/fi';
   const MobileNav = () => {
     return (
       <Stack
-        bg={useColorModeValue('white', 'gray.800')}
+        bg={useColorModeValue('black', 'black')}
         p={4}
         display={{ md: 'none' }}>
         {NAV_ITEMS.map((navItem) => (
@@ -183,6 +184,7 @@ import { FiUser} from 'react-icons/fi';
           href={href ?? '#'}
           justify={'space-between'}
           align={'center'}
+          // color={'black'}
           _hover={{
             textDecoration: 'none',
           }}>

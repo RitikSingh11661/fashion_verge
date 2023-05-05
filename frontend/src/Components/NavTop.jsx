@@ -37,6 +37,7 @@ import { FiFacebook, FiInstagram } from 'react-icons/fi';
           px={{ base: 4 }}
           borderBottom={1}
           borderStyle={'solid'}
+          color={'black'}
           borderColor={useColorModeValue('gray.200', 'gray.900')}
           align={'center'}>
           <Flex border={'0px solid red'} flex={{ base: 1 }} justify={{ base: 'center', md: 'space-around' }}>
@@ -44,7 +45,7 @@ import { FiFacebook, FiInstagram } from 'react-icons/fi';
               alignItems={'center'}
               textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
               fontFamily={'heading'}
-              color={useColorModeValue('gray.800', 'white')}>
+              color={useColorModeValue('gray.800', 'black')}>
               <FiInstagram/> 1.8M Followers
             </Flex>
             <Flex
@@ -52,7 +53,7 @@ import { FiFacebook, FiInstagram } from 'react-icons/fi';
               alignItems={'center'}
               textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
               fontFamily={'heading'}
-              color={useColorModeValue('gray.800', 'white')}>
+              color={useColorModeValue('gray.800', 'black')}>
               <FiFacebook/> 627k Followers 
             </Flex>
            

@@ -25,11 +25,11 @@ setIndex(val);
     <Heading fontFamily={'SF-Heading-font'} fontSize={'42px'} fontWeight={'500'}>New Arrivals</Heading>
     <Flex gap={5} justify={'center'} alignItems={'center'} p={'0px 55px'}>
     <IconButton >
-     <Text bg={'white'} border={'none'} fontSize={'14px'} color="red" _hover={{color:'black',textDecoration:'underline'}} onClick={()=>handlePrevious(0)}>Retrograde</Text>
+     <Text bg={'white'} border={'none'} fontSize={'14px'} color={(index==1)?"red":"grey"} _hover={{color:'black',textDecoration:'underline'}} onClick={()=>handlePrevious(0)}>Retrograde</Text>
     </IconButton>
     <Text>|</Text>
     <IconButton >
-    <Text color="red" bg={'white'} fontSize={'14px'} _hover={{color:'black',textDecoration:'underline'}} onClick={()=>handleNext(1)}>General store</Text>
+    <Text color={(index==0)?"red":"grey"} bg={'white'} fontSize={'14px'} _hover={{color:'black',textDecoration:'underline'}} onClick={()=>handleNext(1)}>General store</Text>
     </IconButton>
     </Flex>
 
@@ -37,7 +37,7 @@ setIndex(val);
 
    <SimpleGrid columns={[2,2,4,4]} p={'20px'} border={'0px solid red'} alignContent={'center'} gap={5}>
        {newArr[index]?.map((el)=>(
-        <Box _hover={{width:'101%',boxShadow:'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px'}} borderRadius={'16px'} width={'100%'} boxShadow={'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px'}>
+        <Box _hover={{width:'101%',boxShadow:'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px'}} borderRadius={'16px'} width={'100%'} boxShadow={'rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset'}>
         <Image borderTopRadius={'16px'} src={el.src} alt={el.name}/>
         <Heading pl={'15px'} textAlign={'left'}  fontSize={'11px'} color={'grey'}>{el.brand}</Heading>
         <Flex justify={'space-between'} padding={'15px'} alignItems={'center'}>
@@ -51,6 +51,7 @@ setIndex(val);
        ))}
     </SimpleGrid>
     </Flex>
+    <Button bg={'black'} color={'white'} _hover={{bg:'grey', color:"black"}}>View all</Button>
     </>
 </div>
 );

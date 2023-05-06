@@ -5,10 +5,18 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
     ChevronDownIcon,
     ChevronRightIcon,
   } from '@chakra-ui/icons';
+import {Link as Goto, useNavigate} from 'react-router-dom'
+
 import { FiUser} from 'react-icons/fi';
   
   export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
+    const navigate=useNavigate();
+
+    const handleLogo=()=>{
+      <navigate to='/'/>
+      // console.log('inside login')
+    }
   
     return (
       <Box top={0} bottom={0} position={'sticky'} zIndex={99}>
@@ -36,12 +44,12 @@ import { FiUser} from 'react-icons/fi';
             />
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-            <Image src='https://i.ibb.co/GT0wDv2/fashion1.jpg' width={['40%','40%','10%','5%']} textAlign={useBreakpointValue({ base: 'center', md: 'left' })}/>
+            <Image onClick={handleLogo} src='https://i.ibb.co/GT0wDv2/fashion1.jpg' width={['40%','40%','10%','7%']} textAlign={useBreakpointValue({ base: 'center', md: 'left' })}/>
             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
             </Flex>
           </Flex>
-  
+
           <Stack
             flex={{ base: 1, md: 0 }}
             justify={'flex-end'}

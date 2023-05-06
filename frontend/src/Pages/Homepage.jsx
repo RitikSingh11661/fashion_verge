@@ -1,8 +1,8 @@
 import React from 'react'
-import Carousel from '../Components/Carousel'
 import { Box } from '@chakra-ui/react'
-import ItemsCarousel from './../Components/ItemsCarousel';
-import MensCarousel from '../Components/MensCarousel';
+import Carousel from './../Components/Carousel';
+import ItemsCarousel from './../Components/HomepageComp/ItemsCarousel';
+import MensCarousel from './../Components/HomepageComp/MensCarousel';
 
 
 export const Homepage = () => {

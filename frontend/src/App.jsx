@@ -5,6 +5,7 @@ import Navbar from './Components/NavBarF';
 import NavTop from './Components/NavTop';
 import { Homepage } from './Pages/Homepage';
 import SingleProduct from './Pages/Singleproductpage';
+import { Allroutes } from './Routes/Allroutes';
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
     <div className="App">
       <NavTop/>
       <Navbar/>
-      <MainRoutes/>
+      {/* <MainRoutes/> */}
+      <Allroutes/>
       <Footer/>
     </div>
   );

@@ -1,12 +1,6 @@
 import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,PopoverTrigger,PopoverContent,useColorModeValue,useBreakpointValue,useDisclosure,Image, VStack} from '@chakra-ui/react';
-  import {
-    HamburgerIcon,
-    CloseIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-  } from '@chakra-ui/icons';
+import {HamburgerIcon,CloseIcon,ChevronDownIcon,ChevronRightIcon} from '@chakra-ui/icons';
 import {Link as Goto, useNavigate} from 'react-router-dom'
-
 import {FiAtSign, FiDollarSign, FiLogIn, FiLogOut, FiSearch, FiShoppingCart, FiStar, FiUser} from 'react-icons/fi';
 import { useContext } from 'react';
 import { authState } from '../ContextProv/AuthContextProv';
@@ -394,5 +388,5 @@ import { authState } from '../ContextProv/AuthContextProv';
           }
       ],
       href: '#',
-    },
+    }
   ];

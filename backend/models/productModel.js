@@ -11,6 +11,6 @@ const productSchema = mongoose.Schema({
     productID: { type: String, required: true },
 })
 
-const productModel = mongoose.model("product", productSchema);
+const ProductModel = mongoose.model("product", productSchema);
 
-module.exports = productModel;
+module.exports = ProductModel;

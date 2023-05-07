@@ -20,35 +20,25 @@ export default function Footer() {
           width={'100%'}
           spacing={15}>
           <Stack w={'95%'} alignItems={'center'} border={'0px solid red'} fontFamily={'ABScript'} align={'flex-start'}>
-            <Heading fontSize='25px' color='#691c35'>About</Heading>
+            <Heading fontSize='25px' color='black'>About</Heading>
             <Link href={'#'}>Our story</Link>
-            <Link href={'#'}>Investors</Link>
+            <Link href={'#'}>Contact us</Link>
             <Link href={'#'}>Careers</Link>
-            <Link href={'#'}>Contact</Link>
-            <Link href={'#'}>Our Benefits</Link>
-            <Link href={'#'}>Sitemap</Link>
+            <Link href={'#'}>Privacy policy</Link>
           </Stack>
           <Stack w={'95%'}  alignItems={'center'} border={'0px solid red'} fontFamily={'ABScript'} align={'flex-start'}>
-            <Heading fontSize='25px' color='#691c35'>Support</Heading>
-            <Link href={'#'}>Blog</Link>
-            <Link href={'#'}>FAQs</Link>
-            <Link href={'#'}>Documents Required</Link>
+            <Heading fontSize='25px' color='black'>Support</Heading>
+            <Link href={'#'}>Payments</Link>
+            <Link href={'#'}>Returns/Exchange</Link>
+            <Link href={'#'}>Shipment</Link>
+            <Link href={'#'}>Terms & conditions</Link>
           </Stack>
           <Stack w={'95%'} alignItems={'center'} border={'0px solid red'} fontFamily={'ABScript'} align={'flex-start'}>
-            <Heading fontSize='25px' color='#691c35'>Customer Care</Heading>
-            <Link href={'#'}>Shipping Policy</Link>
-            <Link href={'#'}>Cancellation & Return</Link>
-            <Link href={'#'}>Privacy Policy</Link>
-            <Link href={'#'}>Rental Terms & Conditions</Link>
-            <Link href={'#'}>Referral Terms & Conditions</Link>
+            <Heading fontSize='25px' color='black'>Customer Care</Heading>
+            <Link href={'#'}>Timings: 10 AM - 6 PM (Mon - Sat)</Link>
+            <Link href={'#'}>Call: +91 7011263423</Link>
+            <Link href={'#'}>E-Mail: care@koovs.com</Link>
           </Stack>
-          {/* <Stack fontFamily={'ABScript'} width={'155px'} align={'flex-start'}>
-            <Heading fontSize='25px' color='#691c35'>NEED HELP ?</Heading>
-            <Link href={'#'}>Facebook</Link>
-            <Link href={'#'}>Twitter</Link>
-            <Link href={'#'}>Instagram</Link>
-            <Link href={'#'}>LinkedIn</Link>
-          </Stack> */}
           <Stack w={'90%'} alignItems={'center'} border={'0px solid red'}>
               <Goto to='/'><Image height='150px' marginLeft={'-5px'} src='https://i.ibb.co/GT0wDv2/fashion1.jpg' alt='logo'/></Goto>
             <Image width='200px' height={'45px'} src='https://www.davidsbridal.com/media/footer/download-app-store.png'/>

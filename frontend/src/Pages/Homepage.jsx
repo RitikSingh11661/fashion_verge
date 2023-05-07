@@ -7,6 +7,7 @@ import TrendingNow from '../Components/HomepageComp/TrendingNow';
 import ArtistEdits from '../Components/HomepageComp/ArtistEdits';
 import SneakerEdit from '../Components/HomepageComp/SneakerEdit';
 import Carousel from './../Components/HomepageComp/Carousel';
+import DeliveryPattern from '../Components/HomepageComp/DeliveryPattern';
 
 export const Homepage = () => {
   return (
@@ -18,6 +19,7 @@ export const Homepage = () => {
       <TrendingNow/>
       <ArtistEdits/>
       <SneakerEdit/>
+      {/* <DeliveryPattern/> */}
     </div>
   )
 }

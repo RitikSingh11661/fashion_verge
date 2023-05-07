@@ -8,14 +8,15 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
 import {Link as Goto, useNavigate} from 'react-router-dom'
 
 import { FiUser} from 'react-icons/fi';
+import { Login } from '../Pages/Login';
   
   export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
     const navigate=useNavigate();
 
     const handleLogo=()=>{
-      <navigate to='/'/>
-      // console.log('inside login')
+      navigate('/')
+      // console.log('nside login')
     }
   
     return (
@@ -63,6 +64,7 @@ import { FiUser} from 'react-icons/fi';
               variant={'link'}
               href={'#'}>
               <FiUser/>
+              {/* <Login /> */}
             </Button>
             <Button
               as={'a'}

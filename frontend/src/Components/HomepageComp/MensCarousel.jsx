@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Heading, IconButton, Image, SimpleGrid, Text, scroll, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, IconButton, Image, Radio, RadioGroup, SimpleGrid, Stack, Text, scroll, useBreakpointValue } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 
 
 const MensCarousel = () => {
 const [index, setIndex] = useState(0);
+// console.log(value)
 
 const woumen=[[{name:"T-Shirts",src:'https://www.koovs.com/cdn/shop/files/Untitled-6-01.jpg?v=1667985899&width=533'},{name:"Jockets",src:'https://www.koovs.com/cdn/shop/files/KOOVS_20OCT22-1025.jpg?v=1667897521&width=533'},{name:"Pants",src:'https://www.koovs.com/cdn/shop/files/KOOVS_20OCT22-0291.jpg?v=1667985664&width=533'},{name:"Shorts",src:'https://www.koovs.com/cdn/shop/files/shortsn-01.jpg?v=1667897412&width=533'}],[{name:"Sweatshirts",src:'https://www.koovs.com/cdn/shop/files/ball_sweatshirt-01.jpg?v=1668170499&width=533'},{name:"Accessories",src:'https://www.koovs.com/cdn/shop/files/unisex_accessories-01.jpg?v=1668170734&width=533'},{name:"Sweatshirts",src:'https://www.koovs.com/cdn/shop/files/templateforproducts-07_5cc40349-551f-4f3b-a4a7-90131b9e4de1.jpg?v=1682678612&width=360'},{name:"Accessories",src:'https://www.koovs.com/cdn/shop/products/1_341ec792-2448-4128-8690-028b164591ca.jpg?v=1681214005&width=360'}]]
 
@@ -29,7 +30,16 @@ setIndex(newIndex >= length ? 0 : newIndex);
     <IconButton bg={'black'} >
      <Button color="red" _hover={{color:'black',backgroundColor:'red'}} onClick={handlePrevious}><BiLeftArrowAlt fontSize={'30px'}/></Button>
     </IconButton>
-    
+
+    {/* <RadioGroup defaultValue='0' bg={'grey'} border={'1px solid green'}>
+    <Stack spacing={2} direction='row'>
+    <Radio outline={'red'} colorScheme='red' value='0'>
+    </Radio>
+    <Radio colorScheme='red' value='1'>
+    </Radio>
+    </Stack>
+    </RadioGroup> */}
+
     <IconButton bg={'black'}>
     <Button color="red" _hover={{color:'black',backgroundColor:'red'}} onClick={handleNext}><BiRightArrowAlt fontSize={'30px'}/></Button>
     </IconButton>

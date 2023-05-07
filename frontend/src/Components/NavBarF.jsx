@@ -63,8 +63,7 @@ import { Login } from '../Pages/Login';
               color={'black'}
               variant={'link'}
               href={'#'}>
-              <FiUser/>
-              {/* <Login /> */}
+              <Goto to='/login'><FiUser/></Goto>
             </Button>
             <Button
               as={'a'}
@@ -77,7 +76,7 @@ import { Login } from '../Pages/Login';
               _hover={{
                 bg: 'pink.300',
               }}>
-              Sign Up
+              <Goto to='/signup'>Sign Up</Goto>
             </Button>
           </Stack>
         </Flex>

@@ -25,6 +25,7 @@ export default function Footer() {
             <Link href={'#'}>Contact us</Link>
             <Link href={'#'}>Careers</Link>
             <Link href={'#'}>Privacy policy</Link>
+            <ModalComp/>
           </Stack>
           <Stack w={'95%'}  alignItems={'center'} border={'0px solid red'} fontFamily={'ABScript'} align={'flex-start'}>
             <Heading fontSize='25px' color='black'>Support</Heading>
@@ -32,24 +33,23 @@ export default function Footer() {
             <Link href={'#'}>Returns/Exchange</Link>
             <Link href={'#'}>Shipment</Link>
             <Link href={'#'}>Terms & conditions</Link>
+            <Image width='200px' height={'45px'} src='https://www.davidsbridal.com/media/footer/download-google-play.png'/>
           </Stack>
           <Stack w={'95%'} alignItems={'center'} border={'0px solid red'} fontFamily={'ABScript'} align={'flex-start'}>
             <Heading fontSize='25px' color='black'>Customer Care</Heading>
             <Link href={'#'}>Timings: 10 AM - 6 PM (Mon - Sat)</Link>
             <Link href={'#'}>Call: +91 7011263423</Link>
             <Link href={'#'}>E-Mail: care@koovs.com</Link>
+            <br />
+            <Image width='200px' height={'45px'} src='https://www.davidsbridal.com/media/footer/download-app-store.png'/>
           </Stack>
           <Stack w={'90%'} alignItems={'center'} border={'0px solid red'}>
               <Goto to='/'><Image height='150px' marginLeft={'-5px'} src='https://i.ibb.co/GT0wDv2/fashion1.jpg' alt='logo'/></Goto>
-            <Image width='200px' height={'45px'} src='https://www.davidsbridal.com/media/footer/download-app-store.png'/>
-            <Image width='200px' height={'45px'} src='https://www.davidsbridal.com/media/footer/download-google-play.png'/>
-              <ModalComp/>
+           
           </Stack>
         </SimpleGrid>
       </Container>
-      <br />
       <hr />
-      <br />
       <Flex gap='25%' color={'black'} justifyContent='space-around' direction={['column','column','row','row','row']} >
             <Flex >
             <Text fontSize={'md'}>

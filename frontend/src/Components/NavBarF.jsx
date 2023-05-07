@@ -7,12 +7,20 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
   } from '@chakra-ui/icons';
 import {Link as Goto, useNavigate} from 'react-router-dom'
 
-import { FiUser} from 'react-icons/fi';
-import { Login } from '../Pages/Login';
+import {FiAtSign, FiDollarSign, FiLogIn, FiLogOut, FiSearch, FiShoppingCart, FiStar, FiUser} from 'react-icons/fi';
+import { useContext } from 'react';
+import { authState } from '../ContextProv/AuthContextProv';
   
   export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
     const navigate=useNavigate();
+    const {isAuth,logoutUser}=useContext(authState);
+    console.log('isAuth:', isAuth)
+
+    const handleLogout=()=>{
+      logoutUser(false)
+      // console.log('Logout')
+    }
 
     const handleLogo=()=>{
       navigate('/')
@@ -45,7 +53,7 @@ import { Login } from '../Pages/Login';
             />
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-            <Image onClick={handleLogo} src='https://i.ibb.co/GT0wDv2/fashion1.jpg' width={['40%','40%','10%','7%']} textAlign={useBreakpointValue({ base: 'center', md: 'left' })}/>
+            <Image cursor={'pointer'} onClick={handleLogo} src='https://i.ibb.co/GT0wDv2/fashion1.jpg' width={['40%','40%','10%','7%']} textAlign={useBreakpointValue({ base: 'center', md: 'left' })}/>
             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
             </Flex>
@@ -61,22 +69,58 @@ import { Login } from '../Pages/Login';
               fontSize={'xl'}
               fontWeight={400}
               color={'black'}
-              variant={'link'}
-              href={'#'}>
-              <Goto to='/login'><FiUser/></Goto>
+              variant={'link'}>
+            <FiSearch/>
             </Button>
             <Button
               as={'a'}
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'white'}
-              bg={'pink.400'}
-              href={'#'}
-              _hover={{
-                bg: 'pink.300',
-              }}>
-              <Goto to='/signup'>Sign Up</Goto>
+              fontSize={'xl'}
+              fontWeight={400}
+              color={'black'}
+              variant={'link'}>
+            <FiStar/>
+            </Button>
+            <Button
+              as={'a'}
+              fontSize={'xl'}
+              fontWeight={400}
+              color={'black'}
+              variant={'link'}>
+            <FiShoppingCart/>
+            </Button>
+            <Button
+              as={'a'}
+              fontSize={'xl'}
+              fontWeight={400}
+              color={'black'}
+              variant={'link'}
+              >
+              <Goto to='/login'><FiLogIn/></Goto>
+            </Button>            
+            <Button
+              as={'a'}
+              fontSize={'xl'}
+              fontWeight={400}
+              color={'black'}
+              variant={'link'}
+              // color={'white'}
+              // bg={'pink.400'}
+              // _hover={{
+              //   bg: 'pink.300',
+              // }}
+              >
+              <Goto to='/signup'><FiUser/></Goto>
+            </Button>
+            <Button
+              as={'a'}
+              fontSize={'xl'}
+              fontWeight={400}
+              color={'black'}
+              variant={'link'}
+              cursor={'pointer'}
+              onClick={handleLogout}
+              >
+              <FiLogOut />
             </Button>
           </Stack>
         </Flex>

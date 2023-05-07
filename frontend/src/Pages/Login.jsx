@@ -10,7 +10,7 @@ const Login = () => {
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const {loginUser,isAuth,logoutUser,handleToken,token}=useContext(authState);
-    console.log('isAuth:', isAuth)
+    // console.log('isAuth:', isAuth)
 
     const navigate=useNavigate();
 
@@ -39,7 +39,7 @@ const Login = () => {
     }
 
     if(isAuth){
-        return <Navigate to='/'/>
+        return <Navigate to='/' />
     }
 
   return (

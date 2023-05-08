@@ -41,9 +41,9 @@ Link of our deployed project:  []()
 
 ## Login Page, Login Failure, Success and SignUp
 
-![SignUp](https://i.ibb.co/TTMRVsQ/Screenshot-1804.png)
+![SignUp]()
  
-![Login](https://i.ibb.co/564q0Bv/Screenshot-1803.png)
+![Login]()
 
 ## Mens Page
 

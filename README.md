@@ -70,4 +70,4 @@ Link of our deployed project:  []()
 
 ## Addding Products Page (Admin)
 
-![AddingProducts]()
+![AddingProducts](https://i.ibb.co/4KcV21C/Screenshot-1805.png)

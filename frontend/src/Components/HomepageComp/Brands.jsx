@@ -9,7 +9,7 @@ const Brands = () => {
   return (
     <div>
         <Heading fontFamily={'SF-Heading-font'} fontWeight={'400'} fontSize={'42px'} gap={10} textDecoration={'underline'}>Brands on koovs</Heading>
-        <SimpleGrid columns={8} padding={'80px'}>
+        <SimpleGrid columns={[2,4,6,8]} padding={'80px'}>
          {BrandsImages?.map((el)=>(
             <Image src={el}/>
          ))}

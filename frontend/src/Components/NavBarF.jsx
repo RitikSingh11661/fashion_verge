@@ -13,12 +13,13 @@ import { authState } from '../ContextProv/AuthContextProv';
 
     const handleLogout=()=>{
       logoutUser(false)
-      // console.log('Logout')
+      if(isAuth){
+        alert('Logout Succesfull !')
+      }
     }
 
     const handleLogo=()=>{
       navigate('/')
-      // console.log('nside login')
     }
   
     return (

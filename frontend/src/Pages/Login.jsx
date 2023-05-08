@@ -103,11 +103,3 @@ const Login = () => {
 }
 
 export default Login
-
-    // <div style={{color:'black'}}>
-    //     Email: <Input type="email" placeholder='Enter Email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
-    //     <br />
-    //     Password: <Input type="password" placeholder='Enter Password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
-    //     <br />
-    //     <Button onClick={handleSubmit}>Submit</Button>
-    // </div>

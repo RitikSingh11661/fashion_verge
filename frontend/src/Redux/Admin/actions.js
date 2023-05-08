@@ -74,7 +74,7 @@ export const getProducts = (dispatch) => {
 export const addProduct = (product) => async (dispatch) => {
   dispatch(addProductRequest());
   try {
-    const {data} =await axios.post(`${process.env.REACT_APP_API_AI}/product/add`,JSON.stringify(product),{
+    const {data} =await axios.post(`http://localhost:4398/product/add`,JSON.stringify(product),{
       headers:{'Content-Type':'application/json',token:localStorage.getItem('token')}
     });
     dispatch(addProductSuccess(data));

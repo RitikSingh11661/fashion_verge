@@ -40,10 +40,11 @@ Link of our deployed project:  []()
 ![HomePage](https://i.ibb.co/jr4jr7n/Screenshot-1802.png)
 
 ## Login Page, Login Failure, Success and SignUp
+
+![SignUp](https://i.ibb.co/TTMRVsQ/Screenshot-1804.png)
  
 ![Login](https://i.ibb.co/564q0Bv/Screenshot-1803.png)
 
-![SignUp](https://i.ibb.co/TTMRVsQ/Screenshot-1804.png)
 ## Mens Page
 
 ![]()

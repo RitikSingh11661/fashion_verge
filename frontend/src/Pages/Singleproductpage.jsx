@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
 import {IoIosArrowForward} from 'react-icons/io'
 import{FaEye} from 'react-icons/fa'
-import size from '../Components/Product/image/size.png'
+// import size from '../Components/Product/image/size.png'
 import {RiSubtractFill} from 'react-icons/ri'
 import {IoMdAdd} from 'react-icons/io'
 import {BsShare} from 'react-icons/bs'
 import {BsQuestionCircle,BsStar} from 'react-icons/bs'
-import ProductCard from "../Components/Product/ProductCard";
+// import ProductCard from "../Components/Product/ProductCard";
 import { Box, Button, Image, Text } from "@chakra-ui/react";
 
 const initialValue=1;
@@ -101,7 +101,7 @@ useEffect(()=>{
          </Box>
          
          <Text><Text style={{fontWeight:"600"}}>Size</Text>:M</Text>
-         <img style={{cursor:"pointer", margin:"10px 0px 20px 0px"}} src={size} alt="" />
+         {/* <img style={{cursor:"pointer", margin:"10px 0px 20px 0px"}} src={size} alt="" /> */}
          <Box>
           <Text style={{fontWeight:'600', fontSize:"14px",margin:"30px 0px 15px 0px"}}>Quantity</Text>
           <Box display={['block','block','flex','flex']} gap='10px'>

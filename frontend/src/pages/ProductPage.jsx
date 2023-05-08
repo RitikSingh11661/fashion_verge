@@ -1,6 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
-import ProductCard from "../components/ProductCard";
+import ProductCard from './../Components/ProductCard';
+
 
 const ProductPage = () => {
   return (

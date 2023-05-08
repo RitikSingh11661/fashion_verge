@@ -5,9 +5,11 @@
 - fw20_0344 - Vivek Kumar	
 - fw21_0996 - akshay abasaheb deshmukh
 
-Original website link: 
+Original website link: [Koovs](https://www.koovs.com/)
 <br/>
-Link of our deployed project:  []()
+Backend Deployed link: [Backend]()
+<br/>
+Link of our deployed project:  [Fullstack App]()
 <br/>
 
 ## Tech Stack and Features
@@ -19,10 +21,8 @@ Link of our deployed project:  []()
 - React.Js
 - Redux
 - Chakra Ui
-- MongoDB
 - HTTP
-
-
+- MongoDB
 
 ## Pages and features
 - Home Page:- Navigation Bar, Footer.
@@ -47,11 +47,11 @@ Link of our deployed project:  []()
 
 ## Mens Page
 
-![]()
+![Mens]()
 
 ## Products Page
 
-![]()
+![Products]()
 
 ## Single Products Page
 

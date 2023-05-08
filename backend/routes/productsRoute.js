@@ -63,7 +63,7 @@ productRoute.get("/", async (req, res) => {
 
         const total = await ProductModel.countDocuments(data);
         const totalPages = Math.ceil(total / limit);
-        const productData = await data.skip(skip).limit(limit).exec();
+        const productData = await ProductModel.find();
 
         res.status(200).send({ page, totalPages, limit, data: productData })
 
@@ -84,10 +84,10 @@ productRoute.get("/:id", async (req, res) => {
     }
 })
 
-productRoute.delete("delete/:id", async (req, res) => {
+productRoute.delete("/delete/:id", async (req, res) => {
     const { id } = req.params;
     try {
-        await productModel.findByIdAndDelete({ _id: id });
+        await ProductModel.findByIdAndDelete({ _id: id });
         res.send("Deleted Successfully");
     } catch (error) {
         res.status(400).send(error.message);

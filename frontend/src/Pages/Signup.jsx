@@ -10,6 +10,7 @@ const Signup = () => {
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [city,setCity]=useState('')
+    const [role,setRole]=useState('')
 
     const handleSubmit=(e)=>{
       e.preventDefault();
@@ -17,7 +18,8 @@ const Signup = () => {
           name,
           email,
           password,
-          city
+          city,
+          role
         }
        console.log('payload:', payload)
 
@@ -86,6 +88,10 @@ const Signup = () => {
             <FormControl id="city" isRequired>
                   <FormLabel>City</FormLabel>
                   <Input type="text" value={city} onChange={(e)=>setCity(e.target.value)}/>
+                </FormControl>
+                <FormControl id="city" isRequired>
+                  <FormLabel>Role</FormLabel>
+                  <Input type="text" value={role} onChange={(e)=>setRole(e.target.value)}/>
                 </FormControl>
             <Stack spacing={10} pt={2}>
               <Button

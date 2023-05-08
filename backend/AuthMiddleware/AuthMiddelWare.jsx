@@ -7,7 +7,7 @@ const Authentication=(req,res,next)=>{
             const decoded=jwt.verify(token.split(' ')[1], 'Fashion');
             if(decoded){
                 console.log('decoded:', decoded)
-                req.body.productID=decoded.productID
+                req.body.adminID=decoded.adminID
                 next();
             }else{
                 res.status(400).send({'err':"Please login first !"}) 

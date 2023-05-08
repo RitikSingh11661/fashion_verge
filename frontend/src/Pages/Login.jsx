@@ -6,10 +6,9 @@ import { authState } from '../ContextProv/AuthContextProv'
 
 
 const Login = () => {
-    const refVal = useRef({'email':'','password':''})
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
-    const {loginUser,isAuth,logoutUser,handleToken,token}=useContext(authState);
+    const {loginUser,isAuth,handleToken,token}=useContext(authState);
     // console.log('isAuth:', isAuth)
 
     const navigate=useNavigate();
@@ -29,11 +28,15 @@ const Login = () => {
         body:JSON.stringify(payload)
        }).then(res=>res.json())
        .then(res=>{
-        console.log(res)
-        localStorage.setItem('token',res.token)
-        loginUser(true)   
-        handleToken(res.token)
-        alert('Login Succesful !')
+         if(res.token){
+          // console.log(res.token)
+          localStorage.setItem('token',res.token)
+          loginUser(true)   
+          handleToken(res.token)
+          alert('Login Succesful !')
+        }else{
+          alert('Wrong Credentials !')
+        }
      })
        .catch(err=>console.log('err',err))
     }

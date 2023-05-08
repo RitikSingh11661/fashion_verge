@@ -5,10 +5,10 @@ const jwt=require('jsonwebtoken')
 const userRouter=Router();
 
 userRouter.post('/register',async(req,res)=>{
-    const {name,email,city,password} =req.body;
+    const {name,email,city,password,role} =req.body;
     try {
         bcrypt.hash(password, 5, async(err, hash)=>{
-           const user=new UserModel({name,email,city,password:hash})
+           const user=new UserModel({name,email,city,password:hash,role})
            await user.save();
            res.status(200).send({'msg':'New uer registred !'})
         });
@@ -24,7 +24,7 @@ userRouter.post('/login',async(req,res)=>{
         if(user){
             bcrypt.compare(password, user.password, async(err, result)=>{
                 if(result){
-                    var token = jwt.sign({productID:user._id}, 'Fashion');
+                    var token = jwt.sign({adminID:user._id}, 'Fashion');
                     res.status(200).send({'msg':'Login successful!',"token":token})
                 }
             });

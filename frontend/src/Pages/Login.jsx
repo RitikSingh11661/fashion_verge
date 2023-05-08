@@ -1,8 +1,9 @@
-import { Input,Button, Heading, Stack, FormControl, FormLabel, Flex, Checkbox, Image } from '@chakra-ui/react'
+import { Input,Button, Heading, Stack, FormControl, FormLabel, Flex, Checkbox, Image, InputGroup, InputRightElement,Text } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
 import { useRef } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { authState } from '../ContextProv/AuthContextProv'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 
 const Login = () => {
@@ -10,7 +11,8 @@ const Login = () => {
     const [password,setPassword]=useState('')
     const {loginUser,isAuth,handleToken,token}=useContext(authState);
     // console.log('isAuth:', isAuth)
-
+    const [showPassword, setShowPassword] = useState(false);
+    
     const navigate=useNavigate();
 
     const handleSubmit=(e)=>{
@@ -58,7 +60,18 @@ const Login = () => {
           </FormControl>
           <FormControl id="password" >
             <FormLabel>Password</FormLabel>
-            <Input type="password" placeholder="password" isInvalid errorBorderColor='black' value={password} onChange={(e)=>setPassword(e.target.value)} />
+            <InputGroup>
+            <Input type={showPassword ? password : 'password'} placeholder="password" isInvalid errorBorderColor='black' value={password} onChange={(e)=>setPassword(e.target.value)} />
+            <InputRightElement h={'full'} >
+                  <Text
+                    variant={'white'}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }>
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Text>
+                </InputRightElement>
+            </InputGroup>
           </FormControl>
           <Stack spacing={6}>
             <Stack

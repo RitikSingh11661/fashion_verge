@@ -22,14 +22,14 @@ setIndex(val);
     <br />
     <>
     <Heading fontFamily={'SF-Heading-font'} fontSize={'42px'} fontWeight={'500'}>Artist Edits</Heading>
-    <Flex gap={5} justify={'center'} alignItems={'center'} p={'0px 55px'}>
-    <IconButton >
+    <Flex gap={5} justify={'center'} alignItems={'center'} p={'0px 55px'} cursor='pointer'>
+    {/* <IconButton > */}
      <Text bg={'white'} border={'none'} fontSize={'14px'} color={(index==1)?"red":"grey"} textDecoration={(index==0)?'underline':"none"} _hover={{color:'black'}} onClick={()=>handlePrevious(0)}>Koovs x Boomranng</Text>
-    </IconButton>
+    {/* </IconButton> */}
     <Text>|</Text>
-    <IconButton >
+    {/* <IconButton > */}
     <Text color={(index==0)?"red":"grey"} bg={'white'} fontSize={'14px'} textDecoration={(index==1)?'underline':"none"} _hover={{color:'black'}} onClick={()=>handleNext(1)}>Koovs x George Thomas</Text>
-    </IconButton>
+    {/* </IconButton> */}
     </Flex>
 
     <Flex mr={'20px'} alignItems={'center'} ml={'20px'} justify={'space-between'}>

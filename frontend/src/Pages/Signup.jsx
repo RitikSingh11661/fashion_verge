@@ -6,6 +6,7 @@ import {Link as Goto} from 'react-router-dom'
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
+                
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')

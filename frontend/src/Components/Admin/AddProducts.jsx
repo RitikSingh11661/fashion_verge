@@ -6,7 +6,7 @@ import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 
 const AddProducts = () => {
   const dispatch = useDispatch();
-  const initForm = { name: '', name: '', brand: '', images: [''], originalPrice: '', discountPrice: '', category: '' }
+  const initForm = { name: '', subhead: '', image: '', originalPrice: '', discountPrice: '', category: '',description:"",discount:"" }
   const [form, setForm] = useState(initForm);
   const toast = useToast();
   const price = form.originalPrice.split('-');
@@ -69,15 +69,15 @@ const AddProducts = () => {
               <FormLabel>Product Name</FormLabel>
               <Input type='text' name='name' background='#fff' htmlSize={45} width='auto' onChange={formChangeHandler} value={form.name} />
               <FormLabel>Product Brand</FormLabel>
-              <Input type='text' name='brand' background='#fff' onChange={formChangeHandler} value={form.brand} />
+              <Input type='text' name='subhead' background='#fff' onChange={formChangeHandler} value={form.subhead} />
               <FormLabel>Product Image Link</FormLabel>
-              {form.images.map((image, index) => (
-                <FormControl key={index} id={`product-image-${index}`}>
-                  <FormLabel>Product Image {index + 1}</FormLabel>
-                  <Input type="text" value={image} background='#fff' onChange={(e) => handleImageChange(index, e)} />
-                  {index > 0 && (<IconButton icon={<DeleteIcon/>} onClick={() => handleRemoveImage(index)}/>)}
+              {/* {form.images.map((image, index) => ( */}
+                <FormControl  id={`product-image-$`}>
+                  <FormLabel>Product Image </FormLabel>
+                  <Input type="text" name='image' value={form.image} background='#fff' onChange={formChangeHandler} />
+                  {/* {index > 0 && (<IconButton icon={<DeleteIcon/>} onClick={() => handleRemoveImage(index)}/>)} */}
                 </FormControl>
-              ))}
+              {/* ))} */}
               <IconButton aria-label='Add' icon={<AddIcon />} onClick={handleAddImage} />
               <FormLabel>Product Original Price</FormLabel>
               <Input type='number' name='originalPrice' background='#fff' onChange={formChangeHandler} value={form.originalPrice} />
@@ -85,6 +85,10 @@ const AddProducts = () => {
               <Input type='number' name='discountPrice' background='#fff' onChange={formChangeHandler} value={form.discountPrice} />
               <FormLabel>Product Category</FormLabel>
               <Input type='text' name='category' background='#fff' onChange={formChangeHandler} value={form.category} />
+              <FormLabel>Discount %</FormLabel>
+              <Input type='text' name='discount' background='#fff' onChange={formChangeHandler} value={form.discount} />
+              <FormLabel>description</FormLabel>
+              <Input type='text' name='description' background='#fff' onChange={formChangeHandler} value={form.description} />
               <Button type='submit' colorScheme='teal' marginTop='2'>Add</Button>
             </FormControl>
           </form>

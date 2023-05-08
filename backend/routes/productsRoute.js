@@ -5,9 +5,16 @@ const productRoute = express.Router();
 
 productRoute.post("/add", async (req, res) => {
     try {
-        const newProduct = new ProductModel({ adminID: req.body.userID, ...req.body });
-        await newProduct.save();
-        res.status(200).send({ msg: "new product added" })
+        const { role } = req.body;
+        if (role === 'admin') {
+            const newProduct = new ProductModel({ adminID: req.body.adminID, ...req.body });
+            await newProduct.save();
+            res.status(200).send({ msg: "new product added" })
+        } else {
+            res.status(400).send({ msg: "You are not authorized" })
+
+        }
+
     } catch (e) {
         console.log(e);
         res.status(400).send({ err: e.message });

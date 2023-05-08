@@ -13,12 +13,11 @@ app.use(cors());
 app.use("/users", userRouter);
 app.use("/products", productRoute);
 
-app.listen(4500, async (req, res) => {
+app.listen(process.env.PORT, async (req, res) => {
     try {
         await connection;
         console.log("connected to mongoose");
     } catch (e) {
         console.log(e);
     }
-    console.log(`Server running in prot 4500`)
 })

@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard";
 
 const ProductPage = () => {
   return (
-    <Box h={"300rem"}>
+    <Box>
       <Flex>
         <ProductCard />
         <ProductCard />

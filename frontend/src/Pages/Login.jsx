@@ -22,7 +22,7 @@ const Login = () => {
             password
         }
 
-        fetch("http://localhost:4500/users/login",{
+        fetch("https://fashion-verg-backend.onrender.com/users/login",{
         method:'POST',
         headers:{
             "Content-type":"application/json"

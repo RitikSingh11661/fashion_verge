@@ -24,7 +24,7 @@ const Signup = () => {
         }
        console.log('payload:', payload)
 
-       fetch("http://localhost:4500/users/register",{
+       fetch("https://fashion-verg-backend.onrender.com/users/register",{
         method:'POST',
         headers:{
             "Content-type":"application/json"

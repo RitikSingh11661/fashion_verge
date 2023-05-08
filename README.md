@@ -8,7 +8,7 @@
 Original website link: [Koovs](https://www.koovs.com/)
 <br/>
 Backend Deployed link shows Products: [BackendProducts](https://fashion-verg-backend.onrender.com/products)
-Backend Deployed link shows Users: [BackendUsers](https://fashion-verg-backend.onrender.com/users)
+Backend Deployed link shows Users: [BackendUsers](https://fashion-verg-backend.onrender.com/user)
 <br/>
 Link of our deployed project:  [Fullstack App]()
 <br/>

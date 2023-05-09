@@ -11,6 +11,7 @@ import Payment from './../Pages/Payment/Payment';
 // import ProductPage from './../Pages/ProductPage';
 import SingleProduct from "../Pages/Singleproductpage";
 import ProductPageAn from "../Pages/ProductPageAn";
+import Cart from "../Pages/Cart";
 
 
 export const Allroutes = () => {
@@ -22,6 +23,7 @@ export const Allroutes = () => {
       <Route path="/admin" element={<Admin/>} />
       <Route path="/payment" element={<Payment/>} />
       <Route path="/products" element={<ProductPageAn/>} />
+      <Route path="/cart" element={<Cart/>} />
       <Route path="/products/:id" element={<SingleProduct/>} />
       <Route path="*" element={<NotFound/>} />
     </Routes>

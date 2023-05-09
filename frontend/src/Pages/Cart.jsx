@@ -7,6 +7,7 @@ import { FiChevronRight } from "react-icons/fi"
 import { total } from "./CartCard";
 import { useEffect, useState } from "react";
 import { Link as Link, Navigate, useNavigate } from "react-router-dom"
+import {Link as Goto} from 'react-router-dom'
 const breackpoints = {
     base: "420px",
     sm: "550px",
@@ -15,6 +16,7 @@ const breackpoints = {
     xl: "950px",
     "2xl": "1200px"
 }
+
 const theme = extendTheme({ breackpoints })
 
 function Cart() {
@@ -91,7 +93,7 @@ function Cart() {
             <Box mt="30px" w={['100%',"100%","80%","70%","70%"]}>
                 {
                     cartData.length > 0 ? cartData.map((e, i) => (
-                        <CartCard key={e.id} data={e} i={i} handleDicrement={handleDicrement} handleIncrement={handleIncrement} deleteCart={deleteCart} />
+                        <CartCard key={e._id} data={e} i={i} handleDicrement={handleDicrement} handleIncrement={handleIncrement} deleteCart={deleteCart} />
                     )) : <Box textAlign={'left'} p='20px'>
                         <Heading>No Data in cart</Heading>
                     </Box>
@@ -125,6 +127,7 @@ function Cart() {
 
                 </Box>
 
+                <Goto to={cartData.length>0 ?'/payment':'#'}>
                 <Box onClick={validateCart}>
                     <Button w="100%" bg="lightgrey" color="black" display="flex" justifyContent="space-between" borderRadius="0" mt="30px">
                         <Box>
@@ -138,6 +141,7 @@ function Cart() {
                         <Box><FiChevronRight /></Box>
                     </Button>
                 </Box>
+                </Goto>
             </Box>
             </Box>
         </>

@@ -45,6 +45,7 @@ export default function SingleProduct() {
 
 
 useEffect(()=>{
+    
      getData(id);
 },[id]);
 

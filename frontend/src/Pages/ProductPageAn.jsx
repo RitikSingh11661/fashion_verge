@@ -137,7 +137,7 @@ const handlePageChange=(val)=>{
     return loading ? (<Spinner thickness='5px' speed='0.75s' emptyColor='gray.200' color='blue.500' width={'250px'}
         height='250px' />) : (<div gap='10px'>
         <br />
-        <Heading fontSize={'24px'} color='teal'>Welcome To Furniture Products Page</Heading>   
+        <Heading fontSize={'24px'} color='teal'>Welcome To Mens Page</Heading>   
         <br />
         <Center >
         <SimpleGrid columns={[1,1,1,2,2]} gap='10%' justifyContent='space-between' width='80%'>

@@ -35,7 +35,7 @@ export default function SingleProduct() {
   // }, []);
 
   const getData = (id) => {
-    fetch(`https://fashion-hub-r5a1.onrender.com/product/${id}`)
+    fetch(`https://fashion-verg-backend.onrender.com/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

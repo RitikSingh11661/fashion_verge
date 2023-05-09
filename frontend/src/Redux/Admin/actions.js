@@ -66,21 +66,20 @@ const getCartsSuccess = (payload) => ({ type: GET_CARTS_SUCCESS, payload });
 
 export const getProducts = (dispatch) => {
   dispatch(getProductDataRequest());
-  axios.get(`${process.env.REACT_APP_API_AI}/product`)
-    .then((res) =>dispatch(getProductDataSuccess(res.data.msg)))
-    .catch(()=>dispatch(getProductDataFailure()));
+  axios.get(`${process.env.REACT_APP_API_AI}/products`)
+    .then((res) => dispatch(getProductDataSuccess(res.data.msg))).catch(() => dispatch(getProductDataFailure()));
 };
 
 export const addProduct = (product) => async (dispatch) => {
   dispatch(addProductRequest());
   try {
-    const {data} =await axios.post(`http://localhost:4398/product/add`,JSON.stringify(product),{
-      headers:{'Content-Type':'application/json',token:localStorage.getItem('token')}
+    const { data } = await axios.post(`${process.env.REACT_APP_API_AI}/products/add`, JSON.stringify(product), {
+      headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') }
     });
     dispatch(addProductSuccess(data));
     return data;
   } catch (error) {
-    console.log('error',error)
+    console.log('error', error)
     dispatch(addProductFailure(error));
   }
 };
@@ -88,23 +87,25 @@ export const addProduct = (product) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   dispatch(deleteProductRequest());
   try {
-    const {data}=await axios.delete(`${process.env.REACT_APP_API_AI}/product/delete/${id}`,{
-      headers:{token:localStorage.getItem('token')}
+    const { data } = await axios.delete(`${process.env.REACT_APP_API_AI}/products/delete/${id}`, {
+      headers: { token: localStorage.getItem('token') }
     });
+    console.log('data', data)
     dispatch(deleteProductSuccess(id));
     return data;
-
   } catch (error) {
+    console.log('error', error)
     dispatch(deleteProductFailure(error));
+    return error;
   }
 };
 
 export const updateProduct = (product) => async (dispatch) => {
-  console.log('product',product)
+  console.log('product', product)
   dispatch(updateProductRequest());
   try {
-    const { data } = await axios.patch(`${process.env.REACT_APP_API_AI}/product/update/${product._id}`,JSON.stringify(product),{
-      headers:{'Content-Type':'application/json',token:localStorage.getItem('token')}
+    const { data } = await axios.patch(`${process.env.REACT_APP_API_AI}/products/update/${product._id}`, JSON.stringify(product), {
+      headers: { 'Content-Type': 'application/json', token: localStorage.getItem('token') }
     });
     dispatch(updateProductSuccess(product));
     return data;
@@ -116,7 +117,7 @@ export const updateProduct = (product) => async (dispatch) => {
 export const getUsersList = async (dispatch) => {
   dispatch(getUserListRequest());
   try {
-    const { data } = await axios.get(`${process.env.REACT_APP_API_AI}/user`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API_AI}/users`);
     dispatch(getUserListSuccess(data.msg));
   } catch (error) {
     dispatch(getUserListFailure(error));
@@ -126,10 +127,10 @@ export const getUsersList = async (dispatch) => {
 export const deleteUser = (id) => async (dispatch) => {
   dispatch(deleteUserRequest());
   try {
-    let res = await axios.delete(`${process.env.REACT_APP_API_AI}/user/delete/${id}`,{
-      headers:{token:localStorage.getItem('token')}
+    let res = await axios.delete(`${process.env.REACT_APP_API_AI}/users/delete/${id}`, {
+      headers: { token: localStorage.getItem('token') }
     });
-    console.log('res',res)
+    console.log('res', res)
     dispatch(deleteUserSuccess(id));
     return res;
   } catch (error) {
@@ -137,14 +138,15 @@ export const deleteUser = (id) => async (dispatch) => {
   }
 };
 
-export const getAdminList = async (dispatch)=>{
+export const getAdminList = async (dispatch) => {
   dispatch(getAdminListRequest());
   try {
-    const { data } = await axios.get(`${process.env.REACT_APP_API_AI}/admin`,{
-      headers:{token:localStorage.getItem('token')}
+    const { data } = await axios.get(`${process.env.REACT_APP_API_AI}/admins`, {
+      headers: { token: localStorage.getItem('token') }
     });
     dispatch(getAdminListSuccess(data.data));
   } catch (error) {
+    console.log('error',error)
     dispatch(getAdminListFailure(error));
   }
 };
@@ -152,8 +154,8 @@ export const getAdminList = async (dispatch)=>{
 export const addAdmin = (admin) => async (dispatch) => {
   dispatch(addAdminRequest());
   try {
-    let { data } = await axios.post(`${process.env.REACT_APP_API_AI}/admin/add`,admin,{
-      headers:{token:localStorage.getItem('token')}
+    let { data } = await axios.post(`${process.env.REACT_APP_API_AI}/admins/add`, admin, {
+      headers: { token: localStorage.getItem('token') }
     });
     dispatch(addAdminSuccess(data));
     return data;
@@ -165,8 +167,8 @@ export const addAdmin = (admin) => async (dispatch) => {
 export const deleteAdmin = (id) => async (dispatch) => {
   dispatch(deleteAdminRequest());
   try {
-    let { data } = await axios.delete(`${process.env.REACT_APP_API_AI}/admin/delete/${id}`,{
-      headers:{token:localStorage.getItem('token')}
+    let { data } = await axios.delete(`${process.env.REACT_APP_API_AI}/admins/delete/${id}`, {
+      headers: { token: localStorage.getItem('token') }
     });
     dispatch(deleteAdminSuccess(id));
     return data;
@@ -176,7 +178,7 @@ export const deleteAdmin = (id) => async (dispatch) => {
 };
 
 const getAllCategories = async () => {
-  let { data } = await axios.get("https://universal-mall-api.onrender.com/products");
+  let { data } = await axios.get(`${process.env.REACT_APP_API_AI}/products`);
   const categories = [];
   data.forEach((product) => {
     if (!categories.includes(product.category))
@@ -188,20 +190,20 @@ const getAllCategories = async () => {
 export const getCategories = async (dispatch) => {
   dispatch(getCategoriesRequest());
   const allCategories = await getAllCategories();
-  const { data:orders } = await axios.get("https://universal-mall-api.onrender.com/orders");
+  const { data: orders } = await axios.get("https://universal-mall-api.onrender.com/orders");
   let obj = {};
-    orders.forEach((order) => {
-      if (!obj[order.category]) obj[order.category] = 1;
-      else obj[order.category]++;
-    });
+  orders.forEach((order) => {
+    if (!obj[order.category]) obj[order.category] = 1;
+    else obj[order.category]++;
+  });
   dispatch(getCategoriesSuccess([allCategories, obj]));
 };
 
 export const getOrders = async (dispatch) => {
   dispatch(getOrdersRequest());
   try {
-    const { data } = await axios.get(`${process.env.REACT_APP_API_AI}/order/allorders`,{
-      headers:{token:localStorage.getItem("token")}
+    const { data } = await axios.get(`${process.env.REACT_APP_API_AI}/order/allorders`, {
+      headers: { token: localStorage.getItem("token") }
     });
     dispatch(getOrdersSuccess(data.data));
   } catch (error) {
@@ -210,36 +212,36 @@ export const getOrders = async (dispatch) => {
 };
 
 export const pendingOrder = (orderId) => async (dispatch) => {
-  const { data:orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
-  orders.forEach((order)=>{
+  const { data: orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
+  orders.forEach((order) => {
     if (order.id === orderId) {
-      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`,{status:'Delayed'}).then(()=>dispatch(getOrders));
+      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`, { status: 'Delayed' }).then(() => dispatch(getOrders));
     }
-  });  
+  });
 };
 
 export const passOrder = (orderId) => async (dispatch) => {
-  const { data:orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
-  orders.forEach((order)=>{
+  const { data: orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
+  orders.forEach((order) => {
     if (order.id === orderId) {
-      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`,{status:'Passed'}).then(()=>dispatch(getOrders));
+      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`, { status: 'Passed' }).then(() => dispatch(getOrders));
       // axios.put(`https://universal-mall-api.onrender.com/orders/${orderId}`,updatedOrder).then(()=>dispatch(getOrders));
     }
-  });  
+  });
 };
 
 export const rejectOrder = (orderId) => async (dispatch) => {
-  const { data:orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
-  orders.forEach((order)=>{
+  const { data: orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
+  orders.forEach((order) => {
     if (order.id === orderId) {
-      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`,{status:'Rejected'}).then(()=>dispatch(getOrders));
+      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`, { status: 'Rejected' }).then(() => dispatch(getOrders));
     }
-  });  
+  });
 };
 
 export const getCarts = async (dispatch) => {
-  const { data:carts } = await axios.get("https://universal-mall-api.onrender.com/carts");
+  const { data: carts } = await axios.get("https://universal-mall-api.onrender.com/carts");
   let cartDetails = [];
-  carts.forEach((c) => {cartDetails.push(c)});
+  carts.forEach((c) => { cartDetails.push(c) });
   dispatch(getCartsSuccess(cartDetails));
 };

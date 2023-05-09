@@ -6,7 +6,7 @@ import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 
 const AddProducts = () => {
   const dispatch = useDispatch();
-  const initForm = { name: '', subhead: '', image: '', originalPrice: '', discountPrice: '', category: '',description:"",discount:"" }
+  const initForm = { name: '', subhead: '', images:[], originalPrice: '', discountPrice: '', category: '',description:"",discount:"" }
   const [form, setForm] = useState(initForm);
   const toast = useToast();
   const price = form.originalPrice.split('-');

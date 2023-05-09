@@ -278,9 +278,8 @@ import { authState } from '../ContextProv/AuthContextProv';
       label: 'Men',
       children: [
         {
-          label: 'New in',
-        //   subLabel: 'Trending Design to inspire you',
-          href: '#',
+          label: 'Products',
+          href: '/products'
         },
         {
           label: 'View all',

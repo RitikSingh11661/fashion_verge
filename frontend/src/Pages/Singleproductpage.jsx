@@ -35,7 +35,7 @@ export default function SingleProduct() {
   // }, []);
 
   const getData = (id) => {
-    fetch(`https://fashion-verg-backend.onrender.com/products/${id}`)
+    fetch(`https://fashion-hub-r5a1.onrender.com/product/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -45,6 +45,7 @@ export default function SingleProduct() {
 
 
 useEffect(()=>{
+    
      getData(id);
 },[id]);
 
@@ -59,8 +60,8 @@ useEffect(()=>{
 
    const n=Math.ceil(Math.random()*6);
 
-  const cartData=JSON.parse(localStorage.getItem("cart"))||[]
-   const handleCart=()=>{
+    const cartData=JSON.parse(localStorage.getItem("cart"))||[]
+    const handleCart=()=>{
     data.quantity=1;
     console.log(data)
     

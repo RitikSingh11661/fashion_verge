@@ -91,7 +91,7 @@ function Cart() {
             <Box mt="30px" w={['100%',"100%","80%","70%","70%"]}>
                 {
                     cartData.length > 0 ? cartData.map((e, i) => (
-                        <CartCard key={e.id} data={e} i={i} handleDicrement={handleDicrement} handleIncrement={handleIncrement} deleteCart={deleteCart} />
+                        <CartCard key={e._id} data={e} i={i} handleDicrement={handleDicrement} handleIncrement={handleIncrement} deleteCart={deleteCart} />
                     )) : <Box textAlign={'left'} p='20px'>
                         <Heading>No Data in cart</Heading>
                     </Box>

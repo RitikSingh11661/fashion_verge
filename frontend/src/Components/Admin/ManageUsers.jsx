@@ -7,7 +7,7 @@ import { FiUserX } from 'react-icons/fi';
 const ManageUsers = () => {
   const { isLoadingUserList, isErrorUserList, users,orders,carts} = useSelector(store => store.AdminReducer);
   let total=0,totalProfit=0,totalCart=0;
-  console.log('orders',orders)
+  // console.log('orders',orders)
   const dispatch = useDispatch();
   const toast = useToast();
 

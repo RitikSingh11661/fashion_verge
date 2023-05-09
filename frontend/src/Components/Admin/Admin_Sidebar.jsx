@@ -10,6 +10,7 @@ import AddProducts from './AddProducts';
 import AddAdmins from './AddAdmins';
 import Analyse from './Analyse';
 // import logo from '../../assets/Decor Dash_logo.png';
+import logo from '../../assets/fashion_logo.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../Redux/Auth/actions';
 import jwtDecode from 'jwt-decode';
@@ -57,8 +58,8 @@ function SidebarWithHeader({ children }) {
         return (
             <Box transition="3s ease" bg={useColorModeValue('white', 'gray.900')} borderRight="1px"
                 borderRightColor={useColorModeValue('gray.200', 'gray.700')} w={{ base: 'full', md: 60 }} pos="fixed" h="full" {...rest}>
-                <Flex h="20" alignItems={"center"} justifyContent="center">
-                    <Image width={'40'} src={'https://i.ibb.co/GT0wDv2/fashion1.jpg'} />
+                <Flex h="20" alignItems={"center"} justifyContent="center" mb='3vh'>
+                    <Image width={'40'} src={logo} />
                 </Flex>
                 {LinkItems.map((link) => (
                     <NavItem onClick={() => setComp(link.compName)} key={link.name} icon={link.icon}>{link.name}</NavItem>

@@ -12,11 +12,6 @@ const SingleProduct = ({ product }) => {
   const toast = useToast();
   const [step, setStep] = useState(1);
   const [progress, setProgress] = useState(50);
-  const options = {style: 'currency',currency: 'INR'};
-  const price = product.originalPrice-product.discountPrice
-  let priceWithString =price.toLocaleString('en-IN',options);
-  const disocuntPercentage = ((price/product.originalPrice)*100).toFixed();
-
   const formChangeHandler = (e) => {
     const { name, value } = e.target;
     formRef.current[name]=value;
@@ -91,7 +86,6 @@ const SingleProduct = ({ product }) => {
   const handleDelete =async() => {
     try {
       const data=await dispatch(deleteProduct(product._id));;
-      console.log('data',data)
       toast({
         title: 'Product Deleted',
         description: `${product.name} has been deleted successfully`,
@@ -142,7 +136,7 @@ const SingleProduct = ({ product }) => {
     </Box>
   }
 
-  if (showEdit) return editFunc();
+  if(showEdit) return editFunc();
 
   return (
     <Center bg='white' mt='2'>
@@ -152,14 +146,14 @@ const SingleProduct = ({ product }) => {
           pos={'relative'}
           _after={{transition:'all.3sease',content:'""',w:'full',h:'full',pos:'absolute',top:5,left:0,filter:'blur(15px)',zIndex:-1}}
           _groupHover={{_after: {filter: 'blur(20px)'}}}>
-          <Image rounded={'lg'} boxSize={150} objectFit={'cover'} src={product.images?product.images[0]:product.image[0]}/>
+          <Image rounded={'lg'} boxSize={150} objectFit={'cover'} src={product.images?product.images[0]:product.image}/>
         </Box>
         <Stack align={'center'}>
           <Heading fontSize={'md'} fontFamily={'body'} fontWeight={500}>{product.name}</Heading>
           <Stack direction={'row'} align={'center'}>
-            <Text fontWeight={800} fontSize={'md'}>{priceWithString}</Text>
-            <Text textDecoration={'line-through'} color={'gray.600'} textDecor='line-through'>₹{product.originalPrice}</Text>
-            <Text color='green.400'>{disocuntPercentage}%</Text>
+            <Text fontWeight={800} fontSize={'md'}>₹{product.price}</Text>
+            <Text textDecoration={'line-through'} color={'gray.600'} textDecor='line-through'>₹{product.oprice}</Text>
+            <Text color='green.400'>{product.discount}</Text>
           </Stack>
         </Stack>
         <Flex justifyContent={'space-evenly'}>

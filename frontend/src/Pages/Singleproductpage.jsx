@@ -35,11 +35,11 @@ export default function SingleProduct() {
   // }, []);
 
   const getData = (id) => {
-    fetch(`https://fashion-verg-backend.onrender.com/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setData(data);
+    fetch(`${process.env.REACT_APP_API_AI}/products/${id}`)
+      .then((res) => res.json()).then((data) => {
+  
+        console.log('data',data);
+        setData(data.msg[0]);
       });
   };
 

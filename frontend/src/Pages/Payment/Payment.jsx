@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Payment.css"
 import { Link } from 'react-router-dom'
+import {Link as Goto} from 'react-router-dom'
 
 const Payment = () => {
 
@@ -63,7 +64,9 @@ const Payment = () => {
         <label for="">Save this information for next time</label>
       </div>
       <div class="btn-part">
+        <Goto to='/cart'>
         <button type="button" class="return-btn">❮ Return to cart</button>
+        </Goto>
         <button type="submit" class="Continue-btn" onClick={handlePayment} ><Link to={"/"}>Continue to Payment</Link> </button>
       </div>
       <footer>

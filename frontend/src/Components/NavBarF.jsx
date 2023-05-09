@@ -2,25 +2,40 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
 import {HamburgerIcon,CloseIcon,ChevronDownIcon,ChevronRightIcon} from '@chakra-ui/icons';
 import {Link as Goto, useNavigate} from 'react-router-dom'
 import {FiAtSign, FiDollarSign, FiLogIn, FiLogOut, FiSearch, FiShoppingCart, FiStar, FiUser} from 'react-icons/fi';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { authState } from '../ContextProv/AuthContextProv';
+import jwtDecode from 'jwt-decode';
+import axios from 'axios';
   
   export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
+    const [user,setUser]=useState({});
     const navigate=useNavigate();
-    const {isAuth,logoutUser}=useContext(authState);
+    const {logoutUser}=useContext(authState);
+    const isAuth = localStorage.getItem('isAuth');
     console.log('isAuth:', isAuth)
 
     const handleLogout=()=>{
       logoutUser(false)
-      if(isAuth){
-        alert('Logout Succesfull !')
-      }
+      // localStorage.removeItem('isAuth');
+      // localStorage.removeItem('token');
+      localStorage.clear();
+      if(isAuth)alert('Logout Succesfull !')
+      window.location.reload();
     }
 
     const handleLogo=()=>{
       navigate('/')
     }
+
+    useEffect(()=>{
+      const token = localStorage.getItem('token');
+      if(token){
+        const {userId}=jwtDecode(token);
+        axios.get(`${process.env.REACT_APP_API_AI}/users/${userId}`).then(res=>setUser(res.data.data[0]))
+        .catch(err=>console.log('error',err))
+      }
+    },[])
   
     return (
       <Box top={0} bottom={0} position={'sticky'} zIndex={99}>
@@ -92,7 +107,8 @@ import { authState } from '../ContextProv/AuthContextProv';
               color={'black'}
               variant={'link'}
               >
-              <Goto to='/login'><FiLogIn/></Goto>
+              {!isAuth && <Goto to='/login'><FiLogIn/></Goto>}
+              {user && <Text>{user.name}</Text>}
             </Button>            
             <Button
               as={'a'}

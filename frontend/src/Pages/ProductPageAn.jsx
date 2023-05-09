@@ -55,7 +55,8 @@ function ProductPageAn(){
             setLoading(true);
             const final = await fetch(url)
             let res = await final.json();
-            setData(res.data);
+            console.log('res',res)
+            setData(res.msg);
             console.log('res.data:', res)
             setLoading(false)            
            } catch (error) {
@@ -99,11 +100,7 @@ const handleWish=(item)=>{
 }
 
     useEffect(()=>{
-        let apiUrl = getUrl(`https://fashion-verg-backend.onrender.com/products`,
-        sort,
-        orderBy,
-        searchQuery
-        )
+        let apiUrl = getUrl(`${process.env.REACT_APP_API_AI}/products`,sort,orderBy,searchQuery)
      fetchdata(apiUrl)
     },[page,orderBy,searchQuery])
 

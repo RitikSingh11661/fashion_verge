@@ -1,59 +1,48 @@
-import { React } from 'react';
-import {Flex, Box,FormControl,FormLabel,Input,InputGroup,HStack,InputRightElement,Stack,Button,Heading,Text,useColorModeValue,Link,} from '@chakra-ui/react';
+import React from 'react';
+import {Flex, Box,FormControl,FormLabel,Input,InputGroup,HStack,InputRightElement,Stack,Button,Heading,Text,useColorModeValue,Link,useToast} from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import {Link as Goto} from 'react-router-dom'
+import {Link as Goto, useNavigate} from 'react-router-dom'
+import { signup } from '../Redux/Auth/actions';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 const Signup = () => {
-    const [showPassword, setShowPassword] = useState(false);
-                
+    const dispatch = useDispatch();
+    const [showPassword, setShowPassword] = useState(false);       
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [city,setCity]=useState('')
     const [role,setRole]=useState('')
+    const navigate = useNavigate();
+    const toast = useToast();
 
-    const handleSubmit=(e)=>{
-      e.preventDefault();
-        const payload={
-          name,
-          email,
-          password,
-          city,
-          role
-        }
-       console.log('payload:', payload)
-
-       fetch("https://fashion-verg-backend.onrender.com/users/register",{
-        method:'POST',
-        headers:{
-            "Content-type":"application/json"
-        },
-        body:JSON.stringify(payload)
-       }).then(res=>res.json())
-       .then(res=>{
-        console.log(res)
-        alert('Signup Succesful')
+    const handleSubmit = async(e, user) => {
+      if (typeof e!=='number')e.preventDefault();
+      const res=await axios.post(`${process.env.REACT_APP_API_AI}/user/add`, JSON.stringify(user), {
+          headers: {'Content-Type': 'application/json'}
+      }).then(() => {
+          dispatch(signup(user)).then(() => {navigate("/login")});
+      }).catch(()=>{
+          toast({
+              title: "User already exist.",
+              description: `Try different ${user.email}`,
+              status: "error",
+              duration: 3000,
+              position: "top",
+              isClosable: true,
+          });
       })
-       .catch(err=>console.log(err))
-    }
+  };
+
 
   return (
-<Flex
-      minH={'100vh'}
-      align={'center'}
-      justify={'center'}
-      color={'black'}
-      bg={useColorModeValue('gray.50', 'gray.800')}
-      >
+<Flex minH={'100vh'} align={'center'} justify={'center'} color={'black'} bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} width={'35%'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'} textAlign={'center'}>
-            Sign up
-          </Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool features ✌️
-          </Text>
+          <Heading fontSize={'4xl'} textAlign={'center'}>Sign up</Heading>
+          <Text fontSize={'lg'} color={'gray.600'}>to enjoy all of our cool features ✌️</Text>
         </Stack>
         <Box
           rounded={'lg'}

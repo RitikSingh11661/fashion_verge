@@ -74,7 +74,7 @@ useEffect(()=>{
     <Box display={'flex'} w='100%' m='auto' justifyContent={'center'}>
         <Text fontSize={['10px','10px','14px','16px','16px']}><Link to='/'>Home</Link></Text>
         <Text fontSize={['10px','10px','14px','16px','16px']} mt='3px'><IoIosArrowForward/></Text>
-        <Text fontSize={['10px','10px','14px','16px','16px']}><Link to='/product'>all men products</Link></Text>
+        <Text fontSize={['10px','10px','14px','16px','16px']}><Link to='/products'>all men products</Link></Text>
         <Text fontSize={['10px','10px','14px','16px','16px']} mt='3px'><IoIosArrowForward/></Text>
         <Text fontSize={['10px','10px','14px','16px','16px']} textTransform={'lowercase'}>{data.name}</Text>
       </Box>

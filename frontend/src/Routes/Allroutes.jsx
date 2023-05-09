@@ -8,8 +8,9 @@ import Signup from './../Pages/Signup';
 import { Admin } from './../Pages/Admin';
 import { NotFound } from './../Pages/NoteFound';
 import Payment from './../Pages/Payment/Payment';
-import ProductPage from './../Pages/ProductPage';
+// import ProductPage from './../Pages/ProductPage';
 import SingleProduct from "../Pages/Singleproductpage";
+import ProductPageAn from "../Pages/ProductPageAn";
 
 
 export const Allroutes = () => {
@@ -20,7 +21,7 @@ export const Allroutes = () => {
       <Route path="/signup" element={<Signup/>} />
       <Route path="/admin" element={<Admin/>} />
       <Route path="/payment" element={<Payment/>} />
-      <Route path="/products" element={<ProductPage/>} />
+      <Route path="/products" element={<ProductPageAn/>} />
       <Route path="/products/:id" element={<SingleProduct/>} />
       <Route path="*" element={<NotFound/>} />
     </Routes>

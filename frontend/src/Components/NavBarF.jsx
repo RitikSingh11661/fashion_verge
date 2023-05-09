@@ -81,7 +81,9 @@ import { authState } from '../ContextProv/AuthContextProv';
               fontWeight={400}
               color={'black'}
               variant={'link'}>
+                <Goto to='/cart'>
             <FiShoppingCart/>
+                </Goto>
             </Button>
             <Button
               as={'a'}

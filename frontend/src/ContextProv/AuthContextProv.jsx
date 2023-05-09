@@ -5,6 +5,11 @@ function AuthContextProvider({children}) {
     const [loading,setLoading] = useState(false)
     const [isAuth,setAuth] = useState(false);
     const [token,setToken] = useState(null);
+
+    const [wishData,setWishData] = useState([]);
+    console.log('wishData:', wishData)
+    const [cartData,setCartItemCont] = useState([]);
+    console.log('cartData:', cartData)
     
     const loginUser=(val1)=>{
         setAuth(val1)
@@ -23,7 +28,7 @@ function AuthContextProvider({children}) {
     }
 
     return(
-        <authState.Provider value={{loginUser,isAuth,logoutUser,token,handleLoading,handleToken,loading}}>{children}</authState.Provider>
+        <authState.Provider value={{loginUser,isAuth,logoutUser,token,handleLoading,handleToken,loading,wishData,setWishData,cartData,setCartItemCont}}>{children}</authState.Provider>
     )
 }
 

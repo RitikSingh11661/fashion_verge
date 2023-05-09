@@ -6,7 +6,7 @@ import { RiCouponLine } from "react-icons/ri"
 import { FiChevronRight } from "react-icons/fi"
 import { total } from "./CartCard";
 import { useEffect, useState } from "react";
-import { Link as Link, Navigate, useNavigate } from "react-router-dom"
+import { Link as Link, Navigate, useNavigate, } from "react-router-dom"
 const breackpoints = {
     base: "420px",
     sm: "550px",
@@ -17,8 +17,10 @@ const breackpoints = {
 }
 const theme = extendTheme({ breackpoints })
 
+
 function Cart() {
     const navigate=useNavigate();
+   
 
     const toast=useToast();
 

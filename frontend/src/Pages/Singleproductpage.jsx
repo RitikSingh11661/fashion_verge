@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
 import {IoIosArrowForward} from 'react-icons/io'
 import{FaEye} from 'react-icons/fa'
-import size from '../Components/Product/image/size.png'
+import size from "./image"
 import {RiSubtractFill} from 'react-icons/ri'
 import {IoMdAdd} from 'react-icons/io'
 import {BsShare} from 'react-icons/bs'
 import {BsQuestionCircle,BsStar} from 'react-icons/bs'
-import ProductCard from "../Components/Product/ProductCard";
+
 import { Box, Button, Image, Text } from "@chakra-ui/react";
 
 const initialValue=1;
@@ -149,4 +149,3 @@ useEffect(()=>{
     </>
   );
 }
-

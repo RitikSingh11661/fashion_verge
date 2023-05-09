@@ -60,8 +60,8 @@ useEffect(()=>{
 
    const n=Math.ceil(Math.random()*6);
 
-    const cartData=JSON.parse(localStorage.getItem("cart"))||[]
-    const handleCart=()=>{
+  const cartData=JSON.parse(localStorage.getItem("cart"))||[]
+   const handleCart=()=>{
     data.quantity=1;
     console.log(data)
     

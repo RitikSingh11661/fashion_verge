@@ -122,7 +122,7 @@ import axios from 'axios';
               //   bg: 'pink.300',
               // }}
               >
-              <Goto to='/signup'><FiUser/></Goto>
+              {!isAuth && <Goto to='/signup'><FiUser/></Goto>}            
             </Button>
             <Button
               as={'a'}

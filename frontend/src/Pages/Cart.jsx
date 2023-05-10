@@ -43,28 +43,23 @@ function Cart() {
     }
 
     const handleIncrement = (id) => {
-        console.log('id',id)
         let d = cartData.filter((el) => {
             if (id == el._id) {
                 el.quantity++;
                 return el
             } else return el
         })
-
-        localStorage.setItem("cart", JSON.stringify(d))
-
+        localStorage.setItem("cart", JSON.stringify(d));
         setDartData(d)
     }
 
     const handleDicrement = (id) => {
-        console.log('id',id)
         let d = cartData.filter((el) => {
             if (id == el._id) {
                 el.quantity--;
                 return el
             } else  return el
         })
-
         localStorage.setItem("cart", JSON.stringify(d))
         setDartData(d)
     }

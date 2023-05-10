@@ -1,7 +1,7 @@
 import { Box, Flex, Text, IconButton, Button, Stack, Collapse, Icon, Link, Popover, PopoverTrigger, PopoverContent, useColorModeValue, useBreakpointValue, useDisclosure, Image, VStack } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Link as Goto, useNavigate } from 'react-router-dom'
-import { FiAtSign, FiDollarSign, FiLogIn, FiLogOut, FiSearch, FiShoppingCart, FiStar, FiUser } from 'react-icons/fi';
+import { FiLogIn, FiLogOut, FiSearch, FiShoppingCart, FiStar, FiUser } from 'react-icons/fi';
 import { useContext, useEffect, useState } from 'react';
 import { authState } from '../ContextProv/AuthContextProv';
 import jwtDecode from 'jwt-decode';
@@ -15,12 +15,14 @@ export default function Navbar() {
   const isAuth = localStorage.getItem('isAuth');
 
   const handleLogout = () => {
-    logoutUser(false)
-    // localStorage.removeItem('isAuth');
-    // localStorage.removeItem('token');
-    localStorage.clear();
-    if (isAuth) alert('Logout Succesfully !')
-    window.location.reload();
+    if (isAuth){
+      logoutUser(false)
+      // localStorage.removeItem('isAuth');
+      // localStorage.removeItem('token');
+      localStorage.clear();
+      alert('Logout Succesfully !')
+      navigate('/login')
+    }
   }
 
   const handleLogo=()=>{navigate('/')}
@@ -30,7 +32,7 @@ export default function Navbar() {
     if (token) {
       const { userId } = jwtDecode(token);
       axios.get(`${process.env.REACT_APP_API_AI}/users/${userId}`).then(res => setUser(res.data.data[0]))
-      .catch(err => console.log('error', err))
+      .catch(err=>console.log('error',err))
     }
   }, [])
 
@@ -66,39 +68,14 @@ export default function Navbar() {
           </Flex>
         </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}>
-          <Button
-            as={'a'}
-            fontSize={'xl'}
-            fontWeight={400}
-            color={'black'}
-            variant={'link'}>
-            <FiSearch />
-          </Button>
-          <Button
-            as={'a'}
-            fontSize={'xl'}
-            fontWeight={400}
-            color={'black'}
-            variant={'link'}>
-            <FiStar />
-          </Button>
-          <Button
-            as={'a'}
-            fontSize={'xl'}
-            fontWeight={400}
-            color={'black'}
-            variant={'link'}>
-            <Goto to='/cart'>
-              <FiShoppingCart />
-            </Goto>
+        <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
+          <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}><FiSearch /></Button>
+          <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}><FiStar /></Button>
+          <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}>
+            <Goto to='/cart'><FiShoppingCart /></Goto>
           </Button>
           <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}>
-            {isAuth?<Text>{user.name}</Text>:<Goto to='/login'><FiLogIn /></Goto>}
+            {isAuth?<Text>{user?.name}</Text>:<Goto to='/login'><FiLogIn /></Goto>}
           </Button>
           {!isAuth &&
             <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}
@@ -114,9 +91,7 @@ export default function Navbar() {
         </Stack>
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
+      <Collapse in={isOpen} animateOpacity><MobileNav/></Collapse>
     </Box>
   );
 }

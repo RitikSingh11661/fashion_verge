@@ -50,8 +50,10 @@ function SidebarWithHeader({ children }) {
         componentChange(comp)
         dispatch(getAdminList)
         const decodedToken = jwtDecode(localStorage.getItem('token'));
+        console.log('decodedToken',decodedToken)
         const detail = admins?.find(admin=>admin._id==decodedToken.userId);
         setAdmin(detail)
+        console.log('detail',detail)
     }, [comp])
     
     const SidebarContent = ({ onClose, ...rest }) => {

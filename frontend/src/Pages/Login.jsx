@@ -11,7 +11,7 @@ import { setLogin } from "../Redux/Auth/actions";
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { loginUser, isAuth, handleToken, token } = useContext(authState);
+  const { isAuth } = useContext(authState);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,19 +21,20 @@ const Login = () => {
 
   const handleSubmit = async (e, user = { email, password }) => {
     if (typeof e !== 'number') e.preventDefault();
-    const userType = user?.email?.includes('admin') ? 'admins' : 'users';
     toast(
       {
         title: "Logging in",
-        description: `Pleasewait`,
+        description: `Please wait`,
         status: "loading",
         duration: 2000,
         position: "top",
         isClosable: true
       });
-    try {
-      const { data } = await axios.post(`${process.env.REACT_APP_API_AI}/${userType}/login`, JSON.stringify(user), { headers: { 'Content-Type': 'application/json' } })
+      try {
+      const userType = user?.email?.includes('admin')?'admins':'users';
+      const {data}=await axios.post(`${process.env.REACT_APP_API_AI}/${userType}/login`,JSON.stringify(user),{headers:{'Content-Type':'application/json'}})
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userrole", data.role);
       toast({
         title: data.msg,
         description: `Welcome ${userType === 'users' ? 'User' : 'Admin'} ${user.email}`,

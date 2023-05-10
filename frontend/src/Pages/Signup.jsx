@@ -20,7 +20,7 @@ const Signup = () => {
     const handleSubmit = async(e, user={name,email,password,city,role:'user'}) => {
       if (typeof e!=='number')e.preventDefault();
       console.log('user',user)
-      const res=await axios.post(`${process.env.REACT_APP_API_AI}/user/add`, JSON.stringify(user), {
+      const res=await axios.post(`${process.env.REACT_APP_API_AI}/users/register`, JSON.stringify(user), {
           headers: {'Content-Type': 'application/json'}
       }).then(() => {
           dispatch(signup(user)).then(() => {navigate("/login")});

@@ -67,7 +67,8 @@ const getCartsSuccess = (payload) => ({ type: GET_CARTS_SUCCESS, payload });
 export const getProducts = (dispatch) => {
   dispatch(getProductDataRequest());
   axios.get(`${process.env.REACT_APP_API_AI}/products`)
-    .then((res) => dispatch(getProductDataSuccess(res.data.msg))).catch(() => dispatch(getProductDataFailure()));
+  .then((res)=>dispatch(getProductDataSuccess(res.data.msg)))
+  .catch(()=>dispatch(getProductDataFailure()));
 };
 
 export const addProduct = (product) => async (dispatch) => {
@@ -101,7 +102,6 @@ export const deleteProduct = (id) => async (dispatch) => {
 };
 
 export const updateProduct = (product) => async (dispatch) => {
-  console.log('product', product)
   dispatch(updateProductRequest());
   try {
     const { data } = await axios.patch(`${process.env.REACT_APP_API_AI}/products/update/${product._id}`, JSON.stringify(product), {

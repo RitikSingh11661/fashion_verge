@@ -74,18 +74,21 @@ import {
   
   // singup function
   
-  export const signup = (user, newToastSucess, newToastFail) => (dispatch) => {
+  export const signup = (user) => async(dispatch) => {
     dispatch(signupRequestAction());
-    return axios
-      .post(`https://universal-mall-api.onrender.com/users`, user)
-      .then(() => {
-        dispatch(signupSuccessAction());
-        newToastSucess();
+    console.log('user',user)
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_API_AI}/users/register`,JSON.stringify(user),{
+        headers: { 'Content-Type': 'application/json'}
       })
-      .catch((err) => {
-        dispatch(signupFailureAction());
-        newToastFail();
-      });
+      console.log('res',res)
+      dispatch(signupSuccessAction())
+      return res;
+    } catch (error) {
+      console.log('error',error)
+      dispatch(signupFailureAction())
+      throw error;
+    }
   };
   
   export const getUsers = (dispatch) => {

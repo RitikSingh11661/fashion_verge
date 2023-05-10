@@ -23,9 +23,6 @@ export const getCaroselsDataFailure = () => {
   return { type: GET_CAROSELS_DATA_FAILURE }
 }
 
-
-
-
 export const getProduct = (param) => (dispatch) => {
   dispatch(getProductsRequest());
   axios.get("https://universal-mall-api.onrender.com/products", param).then((res) => {

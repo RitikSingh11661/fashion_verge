@@ -1,10 +1,9 @@
 import React from 'react';
-import {Flex, Box,FormControl,FormLabel,Input,InputGroup,HStack,InputRightElement,Stack,Button,Heading,Text,useColorModeValue,Link,useToast} from '@chakra-ui/react';
+import {Flex, Box,FormControl,FormLabel,Input,InputGroup,InputRightElement,Stack,Button,Heading,Text,useColorModeValue,Link,useToast} from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {Link as Goto, useNavigate} from 'react-router-dom'
 import { signup } from '../Redux/Auth/actions';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 
 const Signup = () => {
@@ -14,28 +13,48 @@ const Signup = () => {
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [city,setCity]=useState('')
-    const [role,setRole]=useState('')
     const navigate = useNavigate();
     const toast = useToast();
 
-    const handleSubmit = async(e, user) => {
-      if (typeof e!=='number')e.preventDefault();
-      const res=await axios.post(`${process.env.REACT_APP_API_AI}/user/add`, JSON.stringify(user), {
-          headers: {'Content-Type': 'application/json'}
-      }).then(() => {
-          dispatch(signup(user)).then(() => {navigate("/login")});
-      }).catch(()=>{
-          toast({
-              title: "User already exist.",
-              description: `Try different ${user.email}`,
-              status: "error",
-              duration: 3000,
-              position: "top",
-              isClosable: true,
-          });
-      })
+    const wait=()=>{
+      return  toast({
+        title: "Signing up",
+        description: `Please wait`,
+        status: "loading",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+    });
+    }
+    
+    let signUpSucceed = (msg) => {
+      return toast({
+          title: "Successfully created your account.",
+          description: msg,
+          status: "success",
+          duration: 3000,
+          position: "top",
+          isClosable: true,
+      });
   };
-
+    const handleSubmit = async(e, user={name,email,password,city,role:'user',wallet:100}) => {
+      if (typeof e!=='number')e.preventDefault();
+      wait();
+      try {
+        const res = await dispatch(signup(user));
+        signUpSucceed(res?.data.msg);
+        navigate("/login")
+      } catch (error) {
+        toast({
+          title: "Unable to create account",
+          description: `${error.response?.data.msg}`,
+          status: "error",
+          duration: 3000,
+          position: "top",
+          isClosable: true,
+      });
+      }
+  };
 
   return (
 <Flex minH={'100vh'} align={'center'} justify={'center'} color={'black'} bg={useColorModeValue('gray.50', 'gray.800')}>
@@ -44,11 +63,8 @@ const Signup = () => {
           <Heading fontSize={'4xl'} textAlign={'center'}>Sign up</Heading>
           <Text fontSize={'lg'} color={'gray.600'}>to enjoy all of our cool features ✌️</Text>
         </Stack>
-        <Box
-          rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
-          p={8}>
+        <form onSubmit={(e)=>handleSubmit(e)}>
+        <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
               <Box>
                 <FormControl id="firstName" isRequired>
@@ -65,11 +81,7 @@ const Signup = () => {
               <InputGroup>
                 <Input type={showPassword ? password : 'password'} value={password} onChange={(e)=>setPassword(e.target.value)} />
                 <InputRightElement h={'full'}>
-                  <Button
-                    variant={'ghost'}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }>
+                  <Button variant={'ghost'} onClick={() =>setShowPassword((showPassword) => !showPassword)}>
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   </Button>
                 </InputRightElement>
@@ -79,30 +91,17 @@ const Signup = () => {
                   <FormLabel>City</FormLabel>
                   <Input type="text" value={city} onChange={(e)=>setCity(e.target.value)}/>
                 </FormControl>
-                <FormControl id="city" isRequired>
-                  <FormLabel>Role</FormLabel>
-                  <Input type="text" value={role} onChange={(e)=>setRole(e.target.value)}/>
-                </FormControl>
             <Stack spacing={10} pt={2}>
-              <Button
-                loadingText="Submitting"
-                size="lg"
-                bg={'blue.400'}
-                color={'white'}
-                onClick={handleSubmit}
-                _hover={{
-                  bg: 'blue.500',
-                }}>
+              <Button type='submit' loadingText="Submitting" size="lg" bg={'blue.400'} color={'white'} _hover={{bg:'blue.500'}}>
                 Sign up
               </Button>
             </Stack>
-            <Stack pt={6}>
-              <Text align={'center'}>
-                Already a user? <Link color={'blue.400'}><Goto to='/login'>Login</Goto></Link>
-              </Text>
+            <Stack pt={4}>
+              <Text align={'center'}> Already a user? <Link color={'blue.400'}><Goto to='/login'>Login</Goto></Link></Text>
             </Stack>
           </Stack>
         </Box>
+        </form>
       </Stack>
     </Flex>
   )

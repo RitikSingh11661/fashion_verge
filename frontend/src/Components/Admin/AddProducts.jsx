@@ -6,21 +6,18 @@ import { AddIcon, DeleteIcon } from '@chakra-ui/icons';
 
 const AddProducts = () => {
   const dispatch = useDispatch();
-  const initForm = { name: '', subhead: '', images:[], originalPrice: '', discountPrice: '', category: '',description:"",discount:"" }
+  const initForm = { name: '', images:[''], oprice: '', price: '', category: '',description:"",discount:"" }
   const [form, setForm] = useState(initForm);
   const toast = useToast();
-  const price = form.originalPrice.split('-');
+  const price = form.oprice.split('-');
 
-  const handleAddImage = () => {
-    setForm((prevForm) => ({...prevForm,images: [...prevForm.images, '']}));
-  };
+  const handleAddImage=()=>{setForm((prevForm)=>({...prevForm,images: [...prevForm.images,'']}))};
 
   const handleRemoveImage = (index) => {
-    setForm((prevForm) => {
+    setForm((prevForm)=>{
       const newImages = [...prevForm.images];
       newImages.splice(index, 1);
-      return {...prevForm,images: newImages,
-      };
+      return {...prevForm,images: newImages};
     })
   }
 
@@ -34,15 +31,16 @@ const AddProducts = () => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value })
   }
-  
 
-  const formSubmitHandler = (e) => {
+  const formSubmitHandler=async(e)=>{
     e.preventDefault();
-    try {
-      dispatch(addProduct(form))
+    let discount=(((form.oprice-form.price)/form.oprice)*100).toFixed(0)+'%';
+    try { 
+      const res = await dispatch(addProduct({...form,discount}));
+      console.log('res',res)
       toast({
         title: 'Product Added',
-        name: `${form.name} has been added successfully`,
+        name: res.msg,
         status: 'success',
         duration: 6000,
         isClosable: true,
@@ -50,7 +48,7 @@ const AddProducts = () => {
     } catch (error) {
       toast({
         title: 'Error while adding',
-        name: `${form.name} has not added`,
+        name: error.message,
         status: 'error',
         duration: 4000,
         isClosable: true,
@@ -69,24 +67,22 @@ const AddProducts = () => {
               <FormLabel>Product Name</FormLabel>
               <Input type='text' name='name' background='#fff' htmlSize={45} width='auto' onChange={formChangeHandler} value={form.name} />
               <FormLabel>Product Brand</FormLabel>
-              <Input type='text' name='subhead' background='#fff' onChange={formChangeHandler} value={form.subhead} />
+              <Input type='text' name='brand' background='#fff' onChange={formChangeHandler} value={form.brand} />
               <FormLabel>Product Image Link</FormLabel>
-              {/* {form.images.map((image, index) => ( */}
-                <FormControl  id={`product-image-$`}>
-                  <FormLabel>Product Image </FormLabel>
-                  <Input type="text" name='image' value={form.image} background='#fff' onChange={formChangeHandler} />
-                  {/* {index > 0 && (<IconButton icon={<DeleteIcon/>} onClick={() => handleRemoveImage(index)}/>)} */}
+              {form.images.map((image, index) => (
+                <FormControl key={index} id={`product-image-${index}`}>
+                  <FormLabel>Product Image {index + 1}</FormLabel>
+                  <Input type="text" value={image} background='#fff' onChange={(e) => handleImageChange(index, e)} />
+                  {index > 0 && (<IconButton icon={<DeleteIcon/>} onClick={() => handleRemoveImage(index)}/>)}
                 </FormControl>
-              {/* ))} */}
+              ))}
               <IconButton aria-label='Add' icon={<AddIcon />} onClick={handleAddImage} />
               <FormLabel>Product Original Price</FormLabel>
-              <Input type='number' name='originalPrice' background='#fff' onChange={formChangeHandler} value={form.originalPrice} />
+              <Input type='number' name='oprice' background='#fff' onChange={formChangeHandler} value={form.oprice} />
               <FormLabel>Product Discount Price</FormLabel>
-              <Input type='number' name='discountPrice' background='#fff' onChange={formChangeHandler} value={form.discountPrice} />
+              <Input type='number' name='price' background='#fff' onChange={formChangeHandler} value={form.price} />
               <FormLabel>Product Category</FormLabel>
               <Input type='text' name='category' background='#fff' onChange={formChangeHandler} value={form.category} />
-              <FormLabel>Discount %</FormLabel>
-              <Input type='text' name='discount' background='#fff' onChange={formChangeHandler} value={form.discount} />
               <FormLabel>description</FormLabel>
               <Input type='text' name='description' background='#fff' onChange={formChangeHandler} value={form.description} />
               <Button type='submit' colorScheme='teal' marginTop='2'>Add</Button>
@@ -107,7 +103,7 @@ const AddProducts = () => {
           <Stack align={'center'}>
             {form.name && <Heading fontSize={'md'} fontFamily={'body'} fontWeight={500}>{form.name}</Heading>}
             <Stack direction={'row'} align={'center'}>
-              {form.discountPrice && <Text fontWeight={800} fontSize={'md'}>₹{form.discountPrice}</Text>}
+              {form.price && <Text fontWeight={800} fontSize={'md'}>₹{form.price}</Text>}
               {price[0] && <Text textDecoration={'line-through'} color={'gray.600'} textDecor='line-through'>₹{price[0]}</Text>}
               {price[1] && <Text color='green.400'>{price[1]}</Text>}
             </Stack>

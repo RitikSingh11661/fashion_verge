@@ -72,6 +72,7 @@ export const getProducts = (dispatch) => {
 };
 
 export const addProduct = (product) => async (dispatch) => {
+  console.log('product',product)
   dispatch(addProductRequest());
   try {
     const { data } = await axios.post(`${process.env.REACT_APP_API_AI}/products/add`, JSON.stringify(product), {
@@ -82,10 +83,12 @@ export const addProduct = (product) => async (dispatch) => {
   } catch (error) {
     console.log('error', error)
     dispatch(addProductFailure(error));
+    throw error;
   }
 };
 
 export const deleteProduct = (id) => async (dispatch) => {
+  console.log('id',id)
   dispatch(deleteProductRequest());
   try {
     const { data } = await axios.delete(`${process.env.REACT_APP_API_AI}/products/delete/${id}`, {
@@ -125,6 +128,7 @@ export const getUsersList = async (dispatch) => {
 };
 
 export const deleteUser = (id) => async (dispatch) => {
+  console.log('id',id)
   dispatch(deleteUserRequest());
   try {
     let res = await axios.delete(`${process.env.REACT_APP_API_AI}/users/delete/${id}`, {

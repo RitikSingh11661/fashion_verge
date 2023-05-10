@@ -66,12 +66,12 @@ const SingleProduct = ({ product }) => {
         <SimpleGrid>
           <Flex>
             <FormControl mr="5%">
-              <FormLabel htmlFor="originalPrice" fontWeight={'normal'}>Original Price</FormLabel>
-              <Input id="original-price" name='originalPrice' placeholder={product.originalPrice} onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+              <FormLabel htmlFor="oprice" fontWeight={'normal'}>Original Price</FormLabel>
+              <Input id="oprice" name='oprice' placeholder={product.oprice} onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="discountPrice" fontWeight={'normal'}>Discount Price</FormLabel>
-              <Input id="discount-price" name='discountPrice' placeholder={product.discountPrice} onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
+              <FormLabel htmlFor="price" fontWeight={'normal'}>Discount Price</FormLabel>
+              <Input id="price" name='price' placeholder={product.price} onChange={formChangeHandler} fontSize={'small'} size={'sm'} />
             </FormControl>
           </Flex>
           <FormControl mt={'2'}>
@@ -96,7 +96,7 @@ const SingleProduct = ({ product }) => {
     } catch (error) {
       toast({
         title: 'Error while deleting',
-        description: `${product.name} has not deleted`,
+        description:error.message,
         status: 'error',
         duration: 4000,
         isClosable: true,
@@ -107,7 +107,7 @@ const SingleProduct = ({ product }) => {
   const editFunc = () => {
     return <Box borderWidth="1px" rounded="lg" shadow="1px 1px 3px rgba(0,0,0,0.3)" maxWidth={200} p={6} m="10px auto" as="form">
       <Progress hasStripe value={progress} mb="5%" mx="5%" isAnimated></Progress>
-      {step === 1 ? <Form1 product={product} /> : <Form2 />}
+      {step === 1 ? <Form1 product={product}/>:<Form2 />}
       <ButtonGroup mt="5%" w="100%">
         <Flex w="100%" justifyContent="space-evenly">
           <Button
@@ -115,12 +115,8 @@ const SingleProduct = ({ product }) => {
             Back
           </Button>
           <Button w="3.5rem" isDisabled={step === 2} colorScheme="teal" fontSize={'small'} variant="outline" mr="2%" onClick={() => {
-            setStep(step + 1);
-            if (step === 2) {
-              setProgress(100);
-            } else {
-              setProgress(progress + 50);
-            }
+            setStep(step+1);
+            setProgress(step===2?100:progress+50);
           }}>Next
           </Button>
           <Button w="3.5rem" colorScheme="black" fontSize={'small'} variant="outline" mr="2%" onClick={() => {

@@ -14,12 +14,12 @@ const Signup = () => {
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [city,setCity]=useState('')
-    const [role,setRole]=useState('')
     const navigate = useNavigate();
     const toast = useToast();
 
-    const handleSubmit = async(e, user) => {
+    const handleSubmit = async(e, user={name,email,password,city,role:'user'}) => {
       if (typeof e!=='number')e.preventDefault();
+      console.log('user',user)
       const res=await axios.post(`${process.env.REACT_APP_API_AI}/user/add`, JSON.stringify(user), {
           headers: {'Content-Type': 'application/json'}
       }).then(() => {
@@ -78,10 +78,6 @@ const Signup = () => {
             <FormControl id="city" isRequired>
                   <FormLabel>City</FormLabel>
                   <Input type="text" value={city} onChange={(e)=>setCity(e.target.value)}/>
-                </FormControl>
-                <FormControl id="city" isRequired>
-                  <FormLabel>Role</FormLabel>
-                  <Input type="text" value={role} onChange={(e)=>setRole(e.target.value)}/>
                 </FormControl>
             <Stack spacing={10} pt={2}>
               <Button

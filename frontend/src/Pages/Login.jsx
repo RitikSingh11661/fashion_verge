@@ -21,11 +21,10 @@ const Login = () => {
 
   const handleSubmit = async (e, user = { email, password }) => {
     if (typeof e !== 'number') e.preventDefault();
-    const userType = user?.email?.includes('admin') ? 'admins' : 'users';
     toast(
       {
         title: "Logging in",
-        description: `Pleasewait`,
+        description: `Please wait`,
         status: "loading",
         duration: 2000,
         position: "top",
@@ -33,6 +32,8 @@ const Login = () => {
       });
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_API_AI}/${userType}/login`, JSON.stringify(user), { headers: { 'Content-Type': 'application/json' } })
+      console.log('data',data)
+      const userType=user?.email?.includes('admin') ? 'admins' : 'users';
       localStorage.setItem("token", data.token);
       toast({
         title: data.msg,

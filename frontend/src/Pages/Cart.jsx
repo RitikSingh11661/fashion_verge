@@ -8,28 +8,22 @@ import { total } from "./CartCard";
 import { useEffect, useState } from "react";
 import { Link as Link, Navigate, useNavigate } from "react-router-dom"
 import {Link as Goto} from 'react-router-dom'
-const breackpoints = {
-    base: "420px",
-    sm: "550px",
-    md: "700px",
-    lg: "850px",
-    xl: "950px",
-    "2xl": "1200px"
-}
+const breackpoints = {base: "420px",sm: "550px",md: "700px",lg: "850px",xl: "950px","2xl": "1200px"}
 
 const theme = extendTheme({ breackpoints })
 
 function Cart() {
     const navigate=useNavigate();
-
     const toast=useToast();
+    const [cartData, setDartData] = useState([]);
+    const [Total, setTotal] = useState(0)
 
-    const [cartData, setDartData] = useState([])
     useEffect(() => {
         const cartquantity = JSON.parse(localStorage.getItem("cart")) || []
         setDartData(cartquantity)
     }, [])
-    const [Total, setTotal] = useState(0)
+
+    
     let t = cartData.reduce((acc, el) => {
         return acc + (el.quantity * el.price)
     }, 0)
@@ -49,14 +43,12 @@ function Cart() {
     }
 
     const handleIncrement = (id) => {
-
+        console.log('id',id)
         let d = cartData.filter((el) => {
-            if (id == el.id) {
+            if (id == el._id) {
                 el.quantity++;
                 return el
-            } else {
-                return el
-            }
+            } else return el
         })
 
         localStorage.setItem("cart", JSON.stringify(d))
@@ -65,13 +57,12 @@ function Cart() {
     }
 
     const handleDicrement = (id) => {
+        console.log('id',id)
         let d = cartData.filter((el) => {
-            if (id == el.id) {
+            if (id == el._id) {
                 el.quantity--;
                 return el
-            } else {
-                return el
-            }
+            } else  return el
         })
 
         localStorage.setItem("cart", JSON.stringify(d))

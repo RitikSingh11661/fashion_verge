@@ -34,9 +34,9 @@ function CartCard({data,handleDicrement,handleIncrement,i,deleteCart}){
                 <Box w="100px">
                     <Text fontWeight="bold">Quantity</Text>
                     <Box bgColor={'#ececec'} boxShadow='rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset' display="flex" borderRadius={'5px'}>
-                        <Button bg="none" onClick={()=>handleIncrement(data.id)}>+</Button>
+                        <Button bg="none" onClick={()=>handleIncrement(data._id)}>+</Button>
                         <Text  m="auto">{data.quantity}</Text>
-                        <Button bg="none" isDisabled={data.quantity==1? true:false} onClick={()=>handleDicrement(data.id)}>-</Button>
+                        <Button bg="none" isDisabled={data.quantity==1? true:false} onClick={()=>handleDicrement(data._id)}>-</Button>
                     </Box>
                 </Box>
 

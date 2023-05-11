@@ -38,3 +38,28 @@
     -->
   </body>
 </html>
+<script>
+  window.addEventListener('dfMessengerLoaded', function (event) {
+    // Chatbot widget is loaded and ready to use
+    console.log('Chatbot widget is ready to use');
+  });
+
+  function loadChatbot() {
+    // Load the chatbot widget
+    window.dfMessengerSettings = {
+      projectId: '<your project ID>',
+      accessToken: '<your access token>',
+      chatTitle: 'Chat with our support',
+    };
+    window.dfMessenger.init();
+  }
+</script>
+<script type="text/javascript">
+  (function(d, m){
+      var kommunicateSettings ={"appId":"3225eb18165443ea2cbc2321ef066eeff","popupWidget":true,"automaticChatOpenOnNavigation":true};
+      var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+      s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+      var h = document.getElementsByTagName("head")[0]; h.appendChild(s);window.kommunicate = m; m._globals = kommunicateSettings;
+  })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>

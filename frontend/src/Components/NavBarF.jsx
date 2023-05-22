@@ -1,39 +1,48 @@
 import { Box, Flex, Text, IconButton, Button, Stack, Collapse, Icon, Link, Popover, PopoverTrigger, PopoverContent, useColorModeValue, useBreakpointValue, useDisclosure, Image, VStack } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Link as Goto, useNavigate } from 'react-router-dom'
-import { FiLogIn, FiLogOut, FiSearch, FiShoppingCart, FiStar, FiUser } from 'react-icons/fi';
-import { useContext, useEffect, useState } from 'react';
-import { authState } from '../ContextProv/AuthContextProv';
+import { FiLogIn, FiLogOut, FiSearch, FiShoppingBag, FiShoppingCart, FiStar, FiUser } from 'react-icons/fi';
+import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+import { setLogout } from '../Redux/Auth/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Navbar() {
+  const isAuth = useSelector(store => store.AuthReducer.isAuth);
+  const dispatch = useDispatch();
   const { isOpen, onToggle } = useDisclosure();
   const [user, setUser] = useState({});
   const navigate = useNavigate();
-  const { logoutUser } = useContext(authState);
-  const isAuth = localStorage.getItem('isAuth');
+  console.log('isAuth', isAuth)
 
   const handleLogout = () => {
-    if (isAuth){
-      logoutUser(false)
-      // localStorage.removeItem('isAuth');
-      // localStorage.removeItem('token');
-      localStorage.clear();
-      alert('Logout Succesfully !')
-      navigate('/login')
-    }
+    if (isAuth) dispatch(setLogout);
   }
 
-  const handleLogo=()=>{navigate('/')}
+  const handleLogo = () => { navigate('/') }
+
+  const convertTimestamp = (timestamp) => {
+    const date = new Date(timestamp); //1681641044403
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+    return formattedDate; //Sun Apr 16 2023 16:00:44 GMT+0530 (IST);
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       const { userId } = jwtDecode(token);
       axios.get(`${process.env.REACT_APP_API_AI}/users/${userId}`).then(res => setUser(res.data.data[0]))
-      .catch(err=>console.log('error',err))
+        .catch(err => console.log('error', err))
     }
+    const expirationTime = new Date(parseInt(localStorage.getItem('isAuth'))).getTime();
+    // console.log('convertTimestamp(expirationTime)',convertTimestamp(expirationTime))
+    const currentTime = new Date().getTime(), timeRemaining = expirationTime - currentTime;
+    const timeoutId = setTimeout(() => {
+      handleLogout();
+    }, timeRemaining);
+    return () => clearTimeout(timeoutId);
   }, [])
 
   return (
@@ -70,17 +79,20 @@ export default function Navbar() {
 
         <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
           <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}><FiSearch /></Button>
-          <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}><FiStar /></Button>
+          {/* <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}><FiStar /></Button> */}
+          <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}>
+            <Goto to='/orders'><FiShoppingBag /></Goto>
+          </Button>
           <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}>
             <Goto to='/cart'><FiShoppingCart /></Goto>
           </Button>
           <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}>
-            {isAuth?<Text>{user?.name}</Text>:<Goto to='/login'><FiLogIn /></Goto>}
+            {isAuth ? <Text>{user?.name}</Text> : <Goto to='/login'><FiLogIn /></Goto>}
           </Button>
           {!isAuth &&
             <Button as={'a'} fontSize={'xl'} fontWeight={400} color={'black'} variant={'link'}
             // color={'white'},bg={'pink.400'},_hover={{ bg: 'pink.300'}}
-            ><Goto to='/signup'><FiUser/></Goto>
+            ><Goto to='/signup'><FiUser /></Goto>
             </Button>
           }
           {isAuth &&
@@ -91,7 +103,7 @@ export default function Navbar() {
         </Stack>
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity><MobileNav/></Collapse>
+      <Collapse in={isOpen} animateOpacity><MobileNav /></Collapse>
     </Box>
   );
 }
@@ -179,13 +191,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const MobileNav = () => {
   return (
-    <Stack
-      bg={useColorModeValue('black', 'black')}
-      p={4}
-      display={{ md: 'none' }}>
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
+    <Stack bg={useColorModeValue('black', 'black')} p={4} display={{ md: 'none' }}>{NAV_ITEMS.map((navItem) => (<MobileNavItem key={navItem.label} {...navItem} />))}
     </Stack>
   );
 };

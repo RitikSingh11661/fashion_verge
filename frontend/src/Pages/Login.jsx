@@ -1,17 +1,16 @@
 import { Input, Button, Heading, Stack, FormControl, FormLabel, Flex, Checkbox, Image, InputGroup, InputRightElement, Text } from '@chakra-ui/react'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { authState } from '../ContextProv/AuthContextProv'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import axios from 'axios'
 import { useToast } from '@chakra-ui/react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setLogin } from "../Redux/Auth/actions";
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { isAuth } = useContext(authState);
+  const isAuth = useSelector(store => store.AuthReducer.isAuth);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,7 +32,8 @@ const Login = () => {
       try {
       const userType = user?.email?.includes('admin')?'admins':'users';
       const {data}=await axios.post(`${process.env.REACT_APP_API_AI}/${userType}/login`,JSON.stringify(user),{headers:{'Content-Type':'application/json'}})
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data?.token);
+      localStorage.setItem("isAuth", new Date().getTime() + 4 * 60 * 60 * 1000 + 59 * 60 * 1000);
       localStorage.setItem("userrole", data.role);
       toast({
         title: data.msg,

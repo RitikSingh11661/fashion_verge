@@ -45,6 +45,7 @@ const Signup = () => {
         signUpSucceed(res?.data.msg);
         navigate("/login")
       } catch (error) {
+        console.log('error',error)
         toast({
           title: "Unable to create account",
           description: `${error.response?.data.msg}`,

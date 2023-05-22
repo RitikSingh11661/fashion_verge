@@ -1,7 +1,7 @@
 import NavTop from '../Components/NavTop';
 import Navbar from '../Components/NavBarF';
 import { Homepage } from '../Pages/Homepage';
-import Payment from '../Pages/Payment/Payment';
+import Payment from '../Pages/Payment';
 import { NotFound } from '../Pages/NoteFound';
 import Footer from '../Components/Footer';
 import ProductPageAn from '../Pages/ProductPageAn';

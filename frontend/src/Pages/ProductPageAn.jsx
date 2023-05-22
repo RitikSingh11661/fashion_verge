@@ -1,6 +1,6 @@
 import { React, useEffect, useState, useContext } from 'react';
 import { Grid,GridItem,Text,Image,Heading,Button,Input,Spinner,Select, Flex, Box, Center, SimpleGrid, Stack } from '@chakra-ui/react';
-import { Link , useNavigate , useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { authState } from './../ContextProv/AuthContextProv';
 import { FaCartPlus, FaHeart } from 'react-icons/fa';
 import {Link as Goto} from 'react-router-dom'

@@ -4,7 +4,7 @@ import { Homepage } from '../Pages/Homepage';
 import Payment from '../Pages/Payment';
 import { NotFound } from '../Pages/NoteFound';
 import Footer from '../Components/Footer';
-import ProductPageAn from '../Pages/ProductPageAn';
+import {ProductsPage} from '../Pages/ProductsPage';
 import Login from '../Pages/Login';
 import Signup from '../Pages/Signup';
 import Cart from '../Pages/Cart';
@@ -25,7 +25,7 @@ const withLayout = (WrappedComponent) => {
 
 const Pages= {
   HomepageLayout: withLayout(Homepage),
-  ProductsLayout: withLayout(ProductPageAn),
+  ProductsLayout: withLayout(ProductsPage),
   LoginLayout: withLayout(Login),
   SignupLayout: withLayout(Signup),
   CartLayout: withLayout(Cart),

@@ -159,6 +159,6 @@ export const orderPlaced = (cart, addressId) => async (dispatch) => {
   }
 }
 
-export const getOrders = async (userId) => {
+export const getOrders = () => {
   return axios.get(`${process.env.REACT_APP_API_AI}/order`, { headers: { token: localStorage.getItem('token') } });
 }

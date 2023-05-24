@@ -14,8 +14,7 @@ export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
   const [user, setUser] = useState({});
   const navigate = useNavigate();
-  console.log('isAuth', isAuth)
-
+  
   const handleLogout = () => {
     if (isAuth) dispatch(setLogout);
   }

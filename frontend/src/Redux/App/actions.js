@@ -1,36 +1,25 @@
-import {
-  GET_CAROSELS_DATA_FAILURE,
-  GET_CAROSELS_DATA_REQUEST,
-  GET_CAROSELS_DATA_SUCCESS,
-  GET_PRODUCTS_FAILURE,
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_SUCCESS
+import {GET_CAROSELS_DATA_FAILURE,GET_CAROSELS_DATA_REQUEST,GET_CAROSELS_DATA_SUCCESS,GET_PRODUCTS_FAILURE,GET_PRODUCTS_REQUEST,GET_PRODUCTS_SUCCESS
 } from "./actiontypes";
 import axios from "axios";
 
 const getProductsRequest = () => ({ type: GET_PRODUCTS_REQUEST });
 const getProductsSuccess = (payload) => ({ type: GET_PRODUCTS_SUCCESS, payload });
 const getProductstFailure = () => ({ type: GET_PRODUCTS_FAILURE });
-export const getCaroselsDataRequest = () => {
-  return { type: GET_CAROSELS_DATA_REQUEST }
-}
+const getCaroselsDataRequest = () =>({ type: GET_CAROSELS_DATA_REQUEST });
+const getCaroselsDataSuccess = (payload) =>({ type: GET_CAROSELS_DATA_SUCCESS, payload });
+const getCaroselsDataFailure = () =>({ type: GET_CAROSELS_DATA_FAILURE });
 
-export const getCaroselsDataSuccess = (payload) => {
-  return { type: GET_CAROSELS_DATA_SUCCESS, payload }
-}
-
-export const getCaroselsDataFailure = () => {
-  return { type: GET_CAROSELS_DATA_FAILURE }
-}
-
-export const getProduct = (param) => (dispatch) => {
+export const getProducts = (param) => async (dispatch) => {
   dispatch(getProductsRequest());
-  axios.get("https://universal-mall-api.onrender.com/products", param).then((res) => {
-    //    console.log(res.data)
-    dispatch(getProductsSuccess(res.data))
-  }).catch((err) => {
+  try {
+    const res = await axios.get(`${process.env.REACT_APP_API_AI}/products`, param);;
+    dispatch(getProductsSuccess(res.data.data));
+    return res.data.data;
+  } catch (error) {
+    console.log('error',error);
     dispatch(getProductstFailure());
-  })
+    throw error;
+  }
 }
 
 export const getCarosels = (dispatch) => {

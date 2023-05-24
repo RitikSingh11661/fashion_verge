@@ -29,7 +29,7 @@ export const Orders = () => {
           <WrapItem key={order._id}>
             <Box p={4} borderWidth="1px" borderRadius="md" width={{ base: '100%', sm: '300px' }} textAlign="center" boxShadow="md">
               <Image src={order.image} alt={order.name} mb={4} />
-              <Text fontWeight="bold" mb={2}>Order ID: {getOrderId(order._id)}</Text>
+              <Text fontWeight="bold" mb={2}>Order ID: {order._id}</Text>
               <Text>Product: {order.name}</Text>
               <Text>Quantity: {order.quantity}</Text>
               <Text>Purchase Time: {formatDate(order.createdAt)}</Text>

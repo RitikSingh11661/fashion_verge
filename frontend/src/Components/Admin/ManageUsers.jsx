@@ -1,13 +1,12 @@
-import { useEffect} from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, getCarts, getOrders, getUsersList } from '../../Redux/Admin/actions';
-import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Heading, IconButton, useToast,CircularProgress } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Heading, IconButton, useToast, CircularProgress } from '@chakra-ui/react'
 import { FiUserX } from 'react-icons/fi';
 
 const ManageUsers = () => {
-  const { isLoadingUserList, isErrorUserList, users,orders,carts} = useSelector(store => store.AdminReducer);
-  let total=0,totalProfit=0,totalCart=0;
-  // console.log('orders',orders)
+  const { isLoadingUserList, isErrorUserList, users, orders, carts } = useSelector(store => store.AdminReducer);
+  let total = 0, totalProfit = 0, totalCart = 0;
   const dispatch = useDispatch();
   const toast = useToast();
 
@@ -36,27 +35,45 @@ const ManageUsers = () => {
     dispatch(getUsersList)
     dispatch(getOrders)
     dispatch(getCarts)
-  }, [dispatch]);
+  }, []);
 
   // why my this componet is rednering 2 extra times?
   // console.log('manage uses list page rendering')
- 
-  const totalArray=[]
-  orders?.forEach((order,i)=>{
-     if(!totalArray.some(obj=>obj.useremail===order.useremail)){
-       const user={id:order.id,userId:order.userId,username:order.username,useremail:order.useremail,orderQuantity:1,totalOrderPrice:order.originalPrice-order.discountPrice};
-       totalArray.push(user)
-     }else{
-       totalArray.some((obj)=>{
-        obj.totalOrderPrice=obj.totalOrderPrice+(order.originalPrice-order.discountPrice);
-        obj.orderQuantity=obj.orderQuantity+1;
-        })
-      }
-     total+=order.originalPrice-order.discountPrice;
+
+  let totalArray = [], usersIds = [];
+  orders?.forEach((order) => {
+    if (!totalArray.some((obj) => obj.userId === order.userId) && !usersIds.includes(order.userId)) {
+      const newUser = { _id: order.userId, username: order.userName, orderQuantity: order.quantity, totalOrderPrice: order.price, totalCart: 0 };
+      totalArray.push(newUser);
+      usersIds.push(order.userId);
+    } else {
+      totalArray.some((obj) => {
+        obj.orderQuantity = obj.orderQuantity + 1;
+        obj.totalOrderPrice += obj.totalOrderPrice;
+      });
+    }
+    total += order.price;
   });
-  users.forEach((user)=>{
-    if(!totalArray.some(obj=>obj.username===user.name))totalArray.push(user)
+
+  carts?.forEach((cart) => {
+    if (!totalArray.some((obj) => obj.userId === cart.userId) && !usersIds.includes(cart.userId)) {
+      const newUser = { _id: cart.userId, username:cart.userName,orderQuantity: 0, totalOrderPrice: 0, totalCart: 1 };
+      totalArray.push(newUser);
+      usersIds.push(cart.userId);
+    } else {
+      totalArray.some((obj) => {
+        if (obj._id === cart.userId) obj.totalCart += 1;
+      });
+    }
+  });
+
+  users.forEach((user) => {
+    if (!totalArray.some(obj => obj._id === user._id)) {
+      const newUser = { _id: user._id, username: user.name, orderQuantity: 0, totalOrderPrice: 0, totalCart: 0 };
+      totalArray.push(newUser);
+    }
   })
+  console.log('carts', carts)
 
   return (
     <div>
@@ -79,13 +96,14 @@ const ManageUsers = () => {
             <Tbody>
               {totalArray.map((user) => {
                 totalProfit += 100;
-                totalCart+=1;
+                totalCart += 1;
+                // console.log('user',user)
                 return <Tr key={user._id}>
-                  <Td>{user?.username?user.username:user.name}</Td>
-                  <Td >{user?.orderQuantity?user.orderQuantity:0}</Td>
-                  <Td>{1}</Td>
-                  <Td >₹{user?.totalOrderPrice?user.totalOrderPrice:0}</Td>
-                  <Td >₹{totalProfit}</Td>
+                  <Td>{user.username}</Td>
+                  <Td>{user.orderQuantity}</Td>
+                  <Td>{user.totalCart}</Td>
+                  <Td>₹{user.totalOrderPrice}</Td>
+                  <Td>₹{totalProfit}</Td>
                   <Td><IconButton aria-label='Delete database' onClick={() => handleDelete(user)} icon={<FiUserX />} /></Td>
                 </Tr>
               })}

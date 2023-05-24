@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../Redux/Admin/actions';
 import { Heading,Grid ,CircularProgress} from '@chakra-ui/react';
 import SingleProduct from './AdminSingleProduct';
+import { getProducts } from '../../Redux/App/actions';
 
 const ManageProducts = () => {
-  const {isLoading,isError,products}=useSelector(store=>store.AdminReducer);
+  const { isLoading, isError, products } = useSelector((store) => store.AppReducer);
+  console.log('products',products)
   const dispatch=useDispatch();
   
   useEffect(()=>{
-    dispatch(getProducts);
+    dispatch(getProducts());
   },[])
 
   return(
@@ -18,7 +19,7 @@ const ManageProducts = () => {
       {isLoading && <CircularProgress isIndeterminate color='green.300' />}
       {isError && <h2>Error Occured while getting product list</h2>}
       <Grid templateColumns={'repeat(4,1fr)'} gap={2} className='flexbro' templateRows={'100'}>
-      {products.length>0 && products.map(product=><SingleProduct key={product._id} product={product}/>)}
+      {products?.length>0 && products.map(product=><SingleProduct key={product._id} product={product}/>)}
       </Grid>
     </div>
   )

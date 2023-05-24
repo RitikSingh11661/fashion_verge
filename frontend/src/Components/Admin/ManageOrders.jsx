@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getOrders, pendingOrder,passOrder, rejectOrder } from '../../Redux/Admin/actions';
 import {Table,Thead,Tbody,Tr,Th,Td,TableContainer,Heading,IconButton,useToast,Image,CircularProgress} from '@chakra-ui/react'
 import { FiClock,FiTruck,FiXOctagon } from 'react-icons/fi';
-import {v4} from 'uuid'
 import {theme} from '@chakra-ui/react';
 
 const ManageOrders = () => {
@@ -15,14 +14,10 @@ const ManageOrders = () => {
 
   const getButtonColor = (status) => {
     switch (status) {
-      case "Delayed":
-        return theme.colors.blue[900]
-      case "Passed":
-        return theme.colors.green[900]
-      case "Rejected":
-        return theme.colors.red[900]
-      default:
-        return ""
+      case "Delayed": return theme.colors.blue[900]
+      case "Passed": return theme.colors.green[900]
+      case "Rejected": return theme.colors.red[900]
+      default: return ""
     }
   }
   
@@ -50,18 +45,18 @@ const ManageOrders = () => {
             </Thead>
             <Tbody>
               {orders.map((order)=>{
-                const buttonColor = getButtonColor(order.status);
+                // const buttonColor = getButtonColor(order.status);
                 // console.log('buttonColor',buttonColor)
                 let colorProp='',one='',two='',three='';
                 // order.status==='Delayed'?one=theme.colors.blue[900]:order.status==='Passed'?two='green':order.status==='Rejected'?three=theme.colors.red[900]:colorProp="";
                 order.status==='Delayed'?one='blue':order.status==='Passed'?two='green':order.status==='Rejected'?three='red':colorProp="";
                 return(
-                <Tr key={order.userId+order.id+v4()}>
-                <Td><Image src={order.img} alt={order.description} boxSize='90px' borderRadius='full' /></Td>
-                <Td>{order.brand}</Td>
+                <Tr key={order._id}>
+                <Td><Image src={order.image} alt={order.name} boxSize='90px' borderRadius='full' /></Td>
+                <Td>{order.name}</Td>
                 <Td>{order.category}</Td>
-                <Td>{order.username}</Td>
-                <Td>{order.useremail}</Td>
+                <Td>{order.userName}</Td>
+                <Td>{order.userEmail}</Td>
                 <Td><IconButton aria-label='Delay order' onClick={()=>dispatch(pendingOrder(order.id))} color={one} icon={<FiClock/>}/></Td>
                 <Td><IconButton aria-label='Pass order' onClick={()=>dispatch(passOrder(order.id))} color={two} icon={<FiTruck/>}/></Td>
                 <Td><IconButton aria-label='Reject order' onClick={()=>dispatch(rejectOrder(order.id))} color={three} icon={<FiXOctagon/>}/></Td>

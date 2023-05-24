@@ -12,7 +12,7 @@ const getCaroselsDataFailure = () =>({ type: GET_CAROSELS_DATA_FAILURE });
 export const getProducts = (param) => async (dispatch) => {
   dispatch(getProductsRequest());
   try {
-    const res = await axios.get(`${process.env.REACT_APP_API_AI}/products`, param);;
+    const res = await axios.get(`${process.env.REACT_APP_API_AI}/products`, param);
     dispatch(getProductsSuccess(res.data.data));
     return res.data.data;
   } catch (error) {

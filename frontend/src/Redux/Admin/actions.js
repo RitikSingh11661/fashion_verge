@@ -1,38 +1,7 @@
-import {
-  ADD_PRODUCT_FAILURE,
-  ADD_PRODUCT_REQUEST,
-  ADD_PRODUCT_SUCCESS,
-  DELETE_ADMIN_FAILURE,
-  DELETE_ADMIN_REQUEST,
-  DELETE_ADMIN_SUCCESS,
-  DELETE_PRODUCT_FAILURE,
-  DELETE_PRODUCT_REQUEST,
-  DELETE_PRODUCT_SUCCESS,
-  DELETE_USER_FAILURE,
-  DELETE_USER_REQUEST,
-  DELETE_USER_SUCCESS,
-  GET_ADMINLIST_FAILURE,
-  GET_ADMINLIST_REQUEST,
-  GET_ADMINLIST_SUCCESS,
-  GET_USERLIST_FAILURE,
-  GET_USERLIST_REQUEST,
-  GET_USERLIST_SUCCESS,
-  UPDATE_PRODUCT_FAILURE,
-  UPDATE_PRODUCT_REQUEST,
-  UPDATE_PRODUCT_SUCCESS,
-  GET_CATEGORIES_SUCCESS,
-  GET_CATEGORIES_REQUEST,
-  GET_ORDERS_REQUEST,
-  GET_ORDERS_SUCCESS,
-  GET_ORDERS_FAILURE,
-  GET_CARTS_SUCCESS,
+import {ADD_PRODUCT_FAILURE,ADD_PRODUCT_REQUEST,ADD_PRODUCT_SUCCESS,DELETE_ADMIN_FAILURE,DELETE_ADMIN_REQUEST,DELETE_ADMIN_SUCCESS,DELETE_PRODUCT_FAILURE,DELETE_PRODUCT_REQUEST,DELETE_PRODUCT_SUCCESS,DELETE_USER_FAILURE,DELETE_USER_REQUEST,DELETE_USER_SUCCESS,GET_ADMINLIST_FAILURE,GET_ADMINLIST_REQUEST,GET_ADMINLIST_SUCCESS,GET_USERLIST_FAILURE,GET_USERLIST_REQUEST,GET_USERLIST_SUCCESS,UPDATE_PRODUCT_FAILURE,UPDATE_PRODUCT_REQUEST,UPDATE_PRODUCT_SUCCESS,GET_CATEGORIES_SUCCESS,GET_CATEGORIES_REQUEST,GET_ORDERS_REQUEST,GET_ORDERS_SUCCESS,GET_ORDERS_FAILURE,GET_CARTS_SUCCESS,
 } from "./actiontypes";
-import { GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE } from "../App/actiontypes";
 import axios from "axios";
 
-const getProductDataRequest = () => ({ type: GET_PRODUCTS_REQUEST });
-const getProductDataSuccess = (payload) => ({ type: GET_PRODUCTS_SUCCESS, payload });
-const getProductDataFailure = () => ({ type: GET_PRODUCTS_FAILURE });
 const addProductRequest = () => ({ type: ADD_PRODUCT_REQUEST });
 const addProductSuccess = (payload) => ({ type: ADD_PRODUCT_SUCCESS, payload });
 const addProductFailure = () => ({ type: ADD_PRODUCT_FAILURE });
@@ -63,13 +32,6 @@ const getOrdersRequest = () => ({ type: GET_ORDERS_REQUEST });
 const getOrdersSuccess = (payload) => ({ type: GET_ORDERS_SUCCESS, payload });
 const getOrdersFailure = () => ({ type: GET_ORDERS_FAILURE });
 const getCartsSuccess = (payload) => ({ type: GET_CARTS_SUCCESS, payload });
-
-export const getProducts = (dispatch) => {
-  dispatch(getProductDataRequest());
-  axios.get(`${process.env.REACT_APP_API_AI}/products`)
-  .then((res)=>dispatch(getProductDataSuccess(res.data.msg)))
-  .catch(()=>dispatch(getProductDataFailure()));
-};
 
 export const addProduct = (product) => async (dispatch) => {
   console.log('product',product)
@@ -184,9 +146,8 @@ export const deleteAdmin = (id) => async (dispatch) => {
 const getAllCategories = async () => {
   let { data } = await axios.get(`${process.env.REACT_APP_API_AI}/products`);
   const categories = [];
-  data.forEach((product) => {
-    if (!categories.includes(product.category))
-      categories.push(product.category);
+  data.data.forEach((product) => {
+    if (!categories.includes(product.category))categories.push(product.category);    
   });
   return categories;
 };
@@ -194,9 +155,12 @@ const getAllCategories = async () => {
 export const getCategories = async (dispatch) => {
   dispatch(getCategoriesRequest());
   const allCategories = await getAllCategories();
-  const { data: orders } = await axios.get("https://universal-mall-api.onrender.com/orders");
+  const { data } = await axios.get(`${process.env.REACT_APP_API_AI}/order/allorders`, {
+    headers: { token: localStorage.getItem("token") }
+  });
   let obj = {};
-  orders.forEach((order) => {
+  console.log('data.data',data.data);
+  data.data.forEach((order) => {
     if (!obj[order.category]) obj[order.category] = 1;
     else obj[order.category]++;
   });
@@ -244,8 +208,8 @@ export const rejectOrder = (orderId) => async (dispatch) => {
 };
 
 export const getCarts = async (dispatch) => {
-  const { data: carts } = await axios.get("https://universal-mall-api.onrender.com/carts");
-  let cartDetails = [];
-  carts.forEach((c) => { cartDetails.push(c) });
-  dispatch(getCartsSuccess(cartDetails));
+  const { data } = await axios.get(`${process.env.REACT_APP_API_AI}/cart/allcarts`, {
+    headers: { token: localStorage.getItem("token") }
+  });
+  dispatch(getCartsSuccess(data.data));
 };

@@ -44,7 +44,8 @@ const Login = () => {
         isClosable: true,
       });
       dispatch(setLogin);
-      navigate(userType === 'admins' ? '/admin' : comingFrom, { replace: true })
+      const navigation = userType === 'admins' ? '/admin' : comingFrom;
+      navigate(navigation, { replace: true })
     } catch (err) {
       toast({
         title: "Wrong Creadentials.",

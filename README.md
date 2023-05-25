@@ -7,9 +7,9 @@
 
 Original website link: [Koovs](https://www.koovs.com/)
 <br/>
-Backend Deployed link: [BackendProducts](https://fashion-verg-backend.onrender.com/products)
+Backend Deployed link: [BackendProducts](https://fashion-verg-backend.onrender.com/)
 <br/>
-Link of our deployed project:  [Fullstack App]()
+Link of our deployed project:  [Fullstack App](https://fashion-verge.vercel.app/)
 <br/>
 
 ## Tech Stack and Features
@@ -37,8 +37,8 @@ Link of our deployed project:  [Fullstack App]()
 
 ## Landing Page
 
-![HomePage](https://i.ibb.co/jr4jr7n/Screenshot-1802.png)
-
+![HomePage](https://github.com/RitikSingh11661/moral-smoke-4761/assets/72447250/4b47e5db-abce-4f9f-b7ef-027d6c668900)
+f
 ## Login Page, Login Failure, Success and SignUp
 
 ![SignUp](https://github.com/RitikSingh11661/moral-smoke-4761/assets/72447250/9bc84113-a101-43f9-8baf-7dcd1589e03b)

@@ -29,7 +29,7 @@ Link of our deployed project:  [Fullstack App](https://fashion-verge.vercel.app/
 - Admin Page :- Admin dashboard.
 - Login Page:- User authentication using MongoDB.
 - Product Page:- It has sorting & filtering functionality , search functionality.
-- Cart Page :- Dyanamic cart
+- Cart & Order Page :- Dyanamic pages 
 - Payment Page
 
 

@@ -50,16 +50,22 @@ export const ProductsPage = () => {
         setPage((prevPage) => prevPage + val);
     };
 
+    useEffect(() => {
+        const getProductsParams = {
+            params: {
+                 sort: searchParams.get("order") && "price",
+                 orderBy: searchParams.get("order") && searchParams.get("order"),
+                 search:searchParams.get("search") && searchParams.get("search")
+            }
+        };
+        dispatch(getProducts(getProductsParams));
+    }, [location.search]);
+
     // const sortedProducts = [...products]; // Copy products array for sorting
 
     // const filteredProducts = sortedProducts.filter((product) =>
     //     product.name.toLowerCase().includes(searchQuery.toLowerCase())
     // );
-
-    useEffect(() => {
-        const getProductsParams = { params: { sort: searchParams.get("order") && "price", orderBy: searchParams.get("order") && searchParams.get("order") } };
-        dispatch(getProducts(getProductsParams));
-    }, [location.search]);
 
     return (
         isLoading ? (

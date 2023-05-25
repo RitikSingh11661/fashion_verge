@@ -26,7 +26,7 @@ export const Filter = () => {
         order && (params.order = order);
         search && (params.search = search);
         setSearchParams(params);
-    }, [order])
+    }, [order,setSearchParams])
     return (
         <Center >
             <SimpleGrid columns={[1, 1, 1, 2, 2]} gap='10%' justifyContent='space-between' width='80%'>

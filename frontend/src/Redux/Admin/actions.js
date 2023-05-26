@@ -181,32 +181,15 @@ export const getOrders = async (dispatch) => {
   }
 };
 
-export const pendingOrder = (orderId) => async (dispatch) => {
-  const { data: orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
-  orders.forEach((order) => {
-    if (order.id === orderId) {
-      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`, { status: 'Delayed' }).then(() => dispatch(getOrders));
-    }
-  });
-};
-
-export const passOrder = (orderId) => async (dispatch) => {
-  const { data: orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
-  orders.forEach((order) => {
-    if (order.id === orderId) {
-      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`, { status: 'Passed' }).then(() => dispatch(getOrders));
-      // axios.put(`https://universal-mall-api.onrender.com/orders/${orderId}`,updatedOrder).then(()=>dispatch(getOrders));
-    }
-  });
-};
-
-export const rejectOrder = (orderId) => async (dispatch) => {
-  const { data: orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
-  orders.forEach((order) => {
-    if (order.id === orderId) {
-      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`, { status: 'Rejected' }).then(() => dispatch(getOrders));
-    }
-  });
+export const handleOrder = (orderId,status) => async (dispatch) => {
+  try {
+    await axios.patch(`${process.env.REACT_APP_API_AI}/order/update/${orderId}`,{status},{
+      headers: { token: localStorage.getItem("token") },
+    });
+    dispatch(getOrders);
+  } catch (error) {
+    console.log('error',error)
+  }
 };
 
 export const getCarts = async (dispatch) => {

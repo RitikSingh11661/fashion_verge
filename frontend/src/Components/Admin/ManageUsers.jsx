@@ -6,7 +6,7 @@ import { FiUserX } from 'react-icons/fi';
 
 const ManageUsers = () => {
   const { isLoadingUserList, isErrorUserList, users, orders, carts } = useSelector(store => store.AdminReducer);
-  let total = 0, totalProfit = 0, totalCart = 0;
+  let totalOrders=0,total = 0, totalProfit = 0, totalCart = 0;
   const dispatch = useDispatch();
   const toast = useToast();
 
@@ -93,7 +93,8 @@ const ManageUsers = () => {
             <Tbody>
               {totalArray.map((user) => {
                 totalProfit += 100;
-                totalCart += 1;
+                totalCart += user.totalCart;
+                totalOrders+=user.orderQuantity;
                 return <Tr key={user._id}>
                   <Td>{user.username}</Td>
                   <Td>{user.orderQuantity}</Td>
@@ -107,7 +108,7 @@ const ManageUsers = () => {
             <Tfoot bg={'yellow.400'}>
               <Tr>
                 <Th>Total : {users.length}</Th>
-                <Th >Orders : {orders.length}</Th>
+                <Th >Orders : {totalOrders}</Th>
                 <Th>Cart : {totalCart}</Th>
                 <Th>Total : ₹{total}</Th>
                 <Th>Profit : ₹{totalProfit}</Th>

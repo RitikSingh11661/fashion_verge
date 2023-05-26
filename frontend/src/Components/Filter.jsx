@@ -2,7 +2,7 @@ import { Button, Center, Input, SimpleGrid, Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 
-export const Filter = () => {
+export const Filter = ({mb,bg,bgInput,width}) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const initOrder = searchParams.get('order');
     const [order, setOrder] = useState(initOrder || '');
@@ -26,21 +26,22 @@ export const Filter = () => {
         order && (params.order = order);
         search && (params.search = search);
         setSearchParams(params);
-    }, [order,setSearchParams])
+    }, [order,setSearchParams]);
+
     return (
-        <Center >
-            <SimpleGrid columns={[1, 1, 1, 2, 2]} gap='10%' justifyContent='space-between' width='80%'>
-                <Stack width={'75%'} direction={['column', 'column', 'row', 'row']}>
-                    <Input variant='outline' placeholder='Search' onChange={handelChangeSearch}/>
-                    <Button onClick={handleSearch}>Enter</Button>
+        <Center mt={mb} mb={mb}>    
+            <SimpleGrid columns={[1, 1, 1, 2, 2]} gap='10%' justifyContent='space-between' width={width}>
+                <Stack width={'25vw'} direction={['column', 'column', 'row', 'row']}>
+                    <Input variant='outline' bg={bgInput} placeholder='Search' onChange={handelChangeSearch}/>
+                    <Button bg={bg} onClick={handleSearch}>Enter</Button>
                 </Stack>
-                <Stack width={'100%'} direction={['column', 'column', 'row', 'row']}>
-                    <Button onClick={() => { setOrder('asc') }} >Sorting Low to High</Button>
-                    <Button onClick={() => { setOrder('desc') }} >Sorting High to Low</Button>
-                    <Button onClick={() => { setOrder(''); setSearch(''); setPage(1) }}>Reset Page</Button>
+                <Stack width={'35vw'} direction={['column', 'column', 'row', 'row']} b>
+                    <Button bg={bg} onClick={() => { setOrder('asc') }} >Sorting Low to High</Button>
+                    <Button bg={bg} onClick={() => { setOrder('desc') }} >Sorting High to Low</Button>
+                    <Button bg={bg} onClick={() => { setOrder(''); setSearch(''); setPage(1) }}>Reset Page</Button>
                     <br />
                 </Stack>
             </SimpleGrid>
-        </Center>
+            </Center>
     )
 }

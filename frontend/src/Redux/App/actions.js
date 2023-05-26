@@ -14,7 +14,6 @@ export const getProducts = (param) => async (dispatch) => {
   try {
     const res = await axios.get(`${process.env.REACT_APP_API_AI}/products`, param);
     dispatch(getProductsSuccess(res.data.data));
-    console.log('res.data',res.data)
     return res.data.data;
   } catch (error) {
     console.log('error',error);

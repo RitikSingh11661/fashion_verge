@@ -53,9 +53,9 @@ export const ProductsPage = () => {
     useEffect(() => {
         const getProductsParams = {
             params: {
-                 sort: searchParams.get("order") && "price",
-                 orderBy: searchParams.get("order") && searchParams.get("order"),
-                 search:searchParams.get("search") && searchParams.get("search")
+                sort: searchParams.get("order") && "price",
+                orderBy: searchParams.get("order") && searchParams.get("order"),
+                search: searchParams.get("search") && searchParams.get("search")
             }
         };
         dispatch(getProducts(getProductsParams));
@@ -77,7 +77,6 @@ export const ProductsPage = () => {
                 <Heading fontSize={'24px'} color='teal'>Welcome To Mens Page</Heading>
                 <br />
                 <Filter />
-                {/* <ProductsGrid products={products} handleWish={handleWish} handleAddCart={handleAddCart} products={products} orderBy={orderBy}/> */}
                 <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)']} gap={6} padding='3% 10% 3% 10%'>
                     {products?.length > 0 && products.map((el) => (
                         <GridItem boxShadow='rgba(0, 0, 0, 0.35) 0px 5px 15px' borderRadius={'25px'} key={el.id} padding='10px'>

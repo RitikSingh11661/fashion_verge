@@ -8,9 +8,9 @@ import {theme} from '@chakra-ui/react';
 const ManageOrders = () => {
   const {isLoadingOrders,isErrorOrders,orders}=useSelector(state=>state.AdminReducer);
   const dispatch=useDispatch();
-  useEffect(()=>{
-     dispatch(getOrders)
-  },[]);
+
+  // console.log('Manage Orders is rendering');
+  useEffect(()=>{dispatch(getOrders)},[]);
 
   const getButtonColor = (status) => {
     switch (status) {

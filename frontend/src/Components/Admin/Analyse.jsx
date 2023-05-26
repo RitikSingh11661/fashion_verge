@@ -27,6 +27,7 @@ const Analyse = () => {
     dispatch(getCategories);
   },[])
 
+  // console.log('Analyse is rendering');
 // console.log(Object.keys(categories)[0].valueOf('allCategories'))
   return (
     <div>

@@ -84,6 +84,8 @@ export const getUsersList = async (dispatch) => {
   try {
     const { data } = await axios.get(`${process.env.REACT_APP_API_AI}/users`);
     dispatch(getUserListSuccess(data.msg));
+    dispatch(getOrders);
+    dispatch(getCarts);
   } catch (error) {
     dispatch(getUserListFailure(error));
   }

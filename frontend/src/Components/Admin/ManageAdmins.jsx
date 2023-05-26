@@ -6,8 +6,8 @@ import {FiUserX} from 'react-icons/fi';
 
 const ManageAdmins = () => {
   const { isLoadingAdminList, isErrorAdminList, admins } = useSelector(store => store.AdminReducer);
-  console.log('admins',admins)
-  const dispatch = useDispatch();
+  // console.log('Manage admins is rendering');
+    const dispatch = useDispatch();
   const toast = useToast();
 
   const handleDelete =(admin) => {

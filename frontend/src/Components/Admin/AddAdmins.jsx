@@ -36,6 +36,9 @@ const AddAdmins = () => {
     }
     setForm(initForm)
   }
+
+  // console.log('Add Admins is rendering');
+
   return (
     <div>
       <Heading size='md'>Add Admin</Heading>

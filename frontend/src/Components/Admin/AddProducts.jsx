@@ -56,6 +56,8 @@ const AddProducts = () => {
     }
     setForm(initForm)
   }
+
+  // console.log('Add Products is rendering');
   
   return (
     <div>

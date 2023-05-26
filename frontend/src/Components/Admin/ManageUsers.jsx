@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteUser, getCarts, getOrders, getUsersList } from '../../Redux/Admin/actions';
+import { deleteUser, getUsersList } from '../../Redux/Admin/actions';
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Heading, IconButton, useToast, CircularProgress } from '@chakra-ui/react'
 import { FiUserX } from 'react-icons/fi';
 
@@ -31,14 +31,8 @@ const ManageUsers = () => {
     }
   }
 
-  useEffect(() => {
-    dispatch(getUsersList)
-    dispatch(getOrders)
-    dispatch(getCarts)
-  }, []);
-
   // why my this componet is rednering 2 extra times?
-  // console.log('manage uses list page rendering')
+  // console.log('Mannge users is rendering');
 
   let totalArray = [], usersIds = [];
   orders?.forEach((order) => {
@@ -73,7 +67,10 @@ const ManageUsers = () => {
       totalArray.push(newUser);
     }
   })
-  console.log('carts', carts)
+
+  useEffect(() => {
+    dispatch(getUsersList);
+  }, []);
 
   return (
     <div>
@@ -97,7 +94,6 @@ const ManageUsers = () => {
               {totalArray.map((user) => {
                 totalProfit += 100;
                 totalCart += 1;
-                // console.log('user',user)
                 return <Tr key={user._id}>
                   <Td>{user.username}</Td>
                   <Td>{user.orderQuantity}</Td>

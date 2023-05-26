@@ -37,7 +37,7 @@ export const Filter = () => {
                 <Stack width={'100%'} direction={['column', 'column', 'row', 'row']}>
                     <Button onClick={() => { setOrder('asc') }} >Sorting Low to High</Button>
                     <Button onClick={() => { setOrder('desc') }} >Sorting High to Low</Button>
-                    <Button onClick={() => { setOrder(''); setPage(1) }}>Reset Page</Button>
+                    <Button onClick={() => { setOrder(''); setSearch(''); setPage(1) }}>Reset Page</Button>
                     <br />
                 </Stack>
             </SimpleGrid>

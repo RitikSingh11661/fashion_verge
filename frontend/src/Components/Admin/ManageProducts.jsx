@@ -9,8 +9,7 @@ const ManageProducts = () => {
   const { isLoading, isError, products } = useSelector((store) => store.AppReducer);
   const dispatch=useDispatch(); 
   
-  useEffect(()=>{dispatch(getProducts)},[]);
-
+  useEffect(()=>{dispatch(getProducts())},[]);
     // console.log('Manage Products is rendering'); 
 
   return(

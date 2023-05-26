@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOrders, delayOrder,passOrder, rejectOrder, handleOrder } from '../../Redux/Admin/actions';
+import { getOrders,handleOrder } from '../../Redux/Admin/actions';
 import {Table,Thead,Tbody,Tr,Th,Td,TableContainer,Heading,IconButton,useToast,Image,CircularProgress} from '@chakra-ui/react'
 import { FiClock,FiTruck,FiXOctagon } from 'react-icons/fi';
 // import {theme} from '@chakra-ui/react';

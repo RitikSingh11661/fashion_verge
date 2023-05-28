@@ -54,7 +54,7 @@ setIndex(newIndex >= length ? 0 : newIndex);
         <Flex justify={'space-between'} padding={'15px'} alignItems={'center'}>
         <Heading textAlign={'left'} fontSize={'19px'} fontFamily={'SF-Heading-font'} fontWeight={'500'} color={'black'}>{el.name}</Heading>
         <IconButton bg={'black'}>
-       <Button color="red" _hover={{color:'white',backgroundColor:'teal'}} onClick={handleNext}><BiRightArrowAlt fontSize={'20px'}/></Button>
+       <Button color="red" _hover={{color:'white',backgroundColor:'teal'}} ><BiRightArrowAlt fontSize={'20px'}/></Button>
     </IconButton>
         </Flex>
         </Box>

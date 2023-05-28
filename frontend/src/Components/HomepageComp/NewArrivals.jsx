@@ -43,7 +43,7 @@ setIndex(val);
         <Flex justify={'space-between'} padding={'15px'} alignItems={'center'}>
         <Heading textAlign={'left'}  fontSize={'16px'} color={'black'}>{el.name}</Heading>
         <IconButton bg={'black'}>
-       <Button color="red" _hover={{color:'white',backgroundColor:'teal'}} onClick={handleNext}><BiRightArrowAlt fontSize={'20px'}/></Button>
+       <Button color="red" _hover={{color:'white',backgroundColor:'teal'}} ><BiRightArrowAlt fontSize={'20px'}/></Button>
        </IconButton>
         </Flex>
         <Heading pl={'15px'} pb={'10px'} textAlign={'left'}  fontSize={'14px'} color={'grey'}>Rs. {el.price}.00</Heading>

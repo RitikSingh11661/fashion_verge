@@ -17,11 +17,11 @@ export default function Carousel() {
 
   // These are the breakpoints which changes the position of the
   // buttons as the screen size changes
-  const top = useBreakpointValue({ base: '90%', md: '50%' });
-  const side = useBreakpointValue({ base: '30%', md: '50px' });
+  const top = useBreakpointValue({ base: '30%', md: '50%' });
+  const side = useBreakpointValue({ base: '5%', md: '50px' });
 
   // These are the images used in the slide
-  const cards = ['https://i.ibb.co/1RxbKHL/Screenshot-1792.png','https://i.ibb.co/WfqTmPx/Screenshot-1793.png','https://i.ibb.co/1RxbKHL/Screenshot-1792.png'];
+  const cards = ['https://i.ibb.co/1RxbKHL/Screenshot-1792.png','https://i.ibb.co/WfqTmPx/Screenshot-1793.png','https://i.ibb.co/SKY2C6G/Screenshot-1846.png'];
 
   return (
     <Box position={'relative'} height={['300px', '400px', '600px', '600px']} width={['100%', '100%', '100%', '100%']} overflow={'hidden'}>
@@ -59,8 +59,8 @@ export default function Carousel() {
         <BiRightArrowAlt />
       </IconButton>
       {/* Slider */}
-      <Slider {...settings} ref={(slider) => setSlider(slider)}>
-        {cards.map((url,index) => <Box key={index} height={'600px'} width='100%' position="relative" backgroundPosition="center" backgroundRepeat="no-repeat" backgroundSize="cover" backgroundImage={`url(${url})`} />
+      <Slider width='100%' {...settings} ref={(slider) => setSlider(slider)}>
+        {cards.map((url,index) => <Box border={'0px solid red'} key={index} height={['200px','250px','300px','600px']} width={['10%','20%','50%']} position="relative" backgroundPosition="center" backgroundRepeat="no-repeat" backgroundSize="cover" backgroundImage={`url(${url})`} />
          )}
       </Slider>
     </Box>

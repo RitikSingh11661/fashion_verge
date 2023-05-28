@@ -1,4 +1,4 @@
-import { Box, Text, extendTheme, Button, Image, Heading, useToast } from "@chakra-ui/react";
+import { Box, Text, extendTheme, Button, Image, Heading, useToast, Container, Grid } from "@chakra-ui/react";
 import CartCard from "./CartCard";
 import { BsPencil } from "react-icons/bs"
 import { FaShippingFast } from "react-icons/fa"
@@ -43,7 +43,6 @@ function Cart() {
             })
         )
     }
-    // console.log('cart', cart)
 
     useEffect(() => {
         dispatch(getCartData)
@@ -86,37 +85,109 @@ function Cart() {
     }
 
     return (
-        <>
-            <Box><Heading fontSize={["22px", "25px", "28px", "30px", "35px", "35px"]}>Shopping Cart</Heading></Box>
-            <Box display={['block', 'block', 'block', 'flex', 'flex']} w='95%' justifyContent={'space-between'} m='auto' mb='50px'>
-                <Box mt="30px" w={['100%', "100%", "80%", "70%", "70%"]}>
-                    {cart.length > 0 ? cart.map((e, i) => {
-                        return <CartCard key={e._id} data={e} i={i} handleQuantity={handleQuantity} deleteCart={deleteCart} />
-                    }) : <Box textAlign={'left'} p='20px'><Heading>No Data in cart</Heading></Box>
-                    }
-                </Box>
-                <Box mt="50px" w={["90%", "40%", "35%", "25%", "25%", "25%"]} bgColor={'#faf5f5'} borderRadius={'10px'} h='250px' p='10px'
-                    boxShadow='rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset'>
-                    <Box display="flex" borderBottom="1px solid gray" justifyContent="space-between">
-                        <Box><BsPencil size="30px" /><Text>Note</Text></Box>
-                        <Box ><FaShippingFast size="30px" /><Text>Shipping</Text></Box>
-                        <Box><RiCouponLine size="30px" /><Text>Coupon</Text></Box>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between"><Box>Shipping</Box><Box>FREE</Box></Box>
-                    <Box display="flex" justifyContent="space-between"><Box>Subtotal</Box><Box fontWeight="bold">₹ {t}</Box></Box>
-                        <Box onClick={validateCart}>
-                            <Button w="100%" bg="lightgrey" color="black" display="flex" justifyContent="space-between" borderRadius="0" mt="30px">
-                                <Box>
-                                    <Text >Place Order</Text>
-                                    <Text fontSize={["5px", "6px", "8px", "10px", "11px", "11px"]}>5% Extra off on UPI</Text>
-                                </Box>
-                                <Box><Image src="https://cdn.gokwik.co/v4/images/upi-icons.svg" /></Box>
-                                <Box><FiChevronRight /></Box>
-                            </Button>
-                        </Box>
-                </Box>
-            </Box>
-        </>
+        // <Container maxW="container.xl">
+        //     <Heading fontSize={["22px", "25px", "28px", "30px", "35px", "35px"]} textAlign="center" mt="20px">Shopping Cart</Heading>
+        //     <Grid templateColumns={["1fr", "0.5fr", "1fr", "1fr 0.5fr", "1fr 0.5fr"]} className="man" gap="20px" mt="30px" justifyContent="space-between">
+        //         <Box>
+        //             {cart.length > 0 ? cart.map((e, i) => {
+        //                 return <CartCard key={e._id} data={e} i={i} handleQuantity={handleQuantity} deleteCart={deleteCart} />
+        //             }) : <Box textAlign={'left'} p='20px'><Heading>No Data in cart</Heading></Box>
+        //             }
+        //         </Box>
+        //         <Box bgColor="#faf5f5" borderRadius="10px" p="10px"
+        //             boxShadow="rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset"
+        //         >
+        //             <Box display="flex" borderBottom="1px solid gray" justifyContent="space-between">
+        //                 <Box>
+        //                     <BsPencil size="30px" />
+        //                     <Text>Note</Text>
+        //                 </Box>
+        //                 <Box>
+        //                     <FaShippingFast size="30px" />
+        //                     <Text>Shipping</Text>
+        //                 </Box>
+        //                 <Box>
+        //                     <RiCouponLine size="30px" />
+        //                     <Text>Coupon</Text>
+        //                 </Box>
+        //             </Box>
+        //             <Box display="flex" justifyContent="space-between">
+        //                 <Box>Shipping</Box>
+        //                 <Box>FREE</Box>
+        //             </Box>
+        //             <Box display="flex" justifyContent="space-between">
+        //                 <Box>Subtotal</Box>
+        //                 <Box fontWeight="bold">₹ {t}</Box>
+        //             </Box>
+        //             <Box onClick={validateCart}>
+        //                 <Button w="100%" bg="lightgrey" color="black" display="flex" justifyContent="space-between" borderRadius="0" mt="30px">
+        //                     <Box>
+        //                         <Text>Place Order</Text>
+        //                         <Text fontSize={["5px", "6px", "8px", "10px", "11px", "11px"]}>5% Extra off on UPI</Text>
+        //                     </Box>
+        //                     <Box><Image src="https://cdn.gokwik.co/v4/images/upi-icons.svg" /></Box>
+        //                     <Box><FiChevronRight /></Box>
+        //                 </Button>
+        //             </Box>
+        //         </Box>
+        //     </Grid>
+        // </Container>
+        <Container maxW="container.xl">
+  <Heading fontSize={["22px", "25px", "28px", "30px", "35px", "35px"]} textAlign="center" mt="20px">
+    Shopping Cart
+  </Heading>
+  <Grid templateColumns={["1fr", "0.5fr", "1fr", "1fr 0.5fr", "1fr 0.5fr"]} className="man" gap="20px" mt="30px" justifyContent="space-between">
+    <Box>
+      {cart.length > 0 ? (
+        cart.map((e, i) => {
+          return <CartCard key={e._id} data={e} i={i} handleQuantity={handleQuantity} deleteCart={deleteCart} />;
+        })
+      ) : (
+        <Box textAlign="left" p="20px">
+          <Heading>No Data in cart</Heading>
+        </Box>
+      )}
+    </Box>
+    <Box bgColor="#faf5f5" borderRadius="10px" p="10px" width={["100%", "100%", "100%", "100%", "auto"]}>
+      <Box display="flex" borderBottom="1px solid gray" justifyContent="space-between">
+        <Box>
+          <BsPencil size="30px" />
+          <Text>Note</Text>
+        </Box>
+        <Box>
+          <FaShippingFast size="30px" />
+          <Text>Shipping</Text>
+        </Box>
+        <Box>
+          <RiCouponLine size="30px" />
+          <Text>Coupon</Text>
+        </Box>
+      </Box>
+      <Box display="flex" justifyContent="space-between">
+        <Box>Shipping</Box>
+        <Box>FREE</Box>
+      </Box>
+      <Box display="flex" justifyContent="space-between">
+        <Box>Subtotal</Box>
+        <Box fontWeight="bold">₹ {t}</Box>
+      </Box>
+      <Box onClick={validateCart}>
+        <Button w="100%" bg="lightgrey" color="black" display="flex" justifyContent="space-between" borderRadius="0" mt="30px">
+          <Box>
+            <Text>Place Order</Text>
+            <Text fontSize={["5px", "6px", "8px", "10px", "11px", "11px"]}>5% Extra off on UPI</Text>
+          </Box>
+          <Box>
+            <Image src="https://cdn.gokwik.co/v4/images/upi-icons.svg" />
+          </Box>
+          <Box>
+            <FiChevronRight />
+          </Box>
+        </Button>
+      </Box>
+    </Box>
+  </Grid>
+</Container>
     )
 }
 export default Cart;

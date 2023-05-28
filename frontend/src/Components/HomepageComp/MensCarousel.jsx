@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading, IconButton, Image, Radio, RadioGroup, SimpleGrid, Stack, Text, scroll, useBreakpointValue } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 
 const MensCarousel = () => {
@@ -20,6 +21,11 @@ const handleNext = () => {
 const newIndex = index + 1;
 setIndex(newIndex >= length ? 0 : newIndex);
 };
+
+const navigate=useNavigate();
+const handleViewAll=()=>{
+    navigate('/products')
+}
 
  return (
 <div className="carousel" style={{color:'black'}}>
@@ -54,7 +60,7 @@ setIndex(newIndex >= length ? 0 : newIndex);
         <Flex justify={'space-between'} padding={'15px'} alignItems={'center'}>
         <Heading textAlign={'left'} fontSize={'19px'} fontFamily={'SF-Heading-font'} fontWeight={'500'} color={'black'}>{el.name}</Heading>
         <IconButton bg={'black'}>
-       <Button color="red" _hover={{color:'white',backgroundColor:'teal'}} ><BiRightArrowAlt fontSize={'20px'}/></Button>
+       <Button color="red" _hover={{color:'white',backgroundColor:'teal'}} onClick={handleViewAll}><BiRightArrowAlt fontSize={'20px'}/></Button>
     </IconButton>
         </Flex>
         </Box>

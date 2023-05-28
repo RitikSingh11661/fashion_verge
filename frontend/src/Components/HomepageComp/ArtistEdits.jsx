@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading, IconButton, Image, SimpleGrid, Text, scroll, useBreakpointValue } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 import {Link} from "react-scroll"
 
 const ArtistEdits= () => {
@@ -16,6 +17,12 @@ setIndex(val);
 const handleNext = (val) => {
 setIndex(val);
 };
+
+const navigate=useNavigate();
+
+const handleViewAll=()=>{
+    navigate('/products')
+}
 
  return (
 <div className="carousel" style={{color:'black'}}>
@@ -50,10 +57,12 @@ setIndex(val);
        ))}
     </SimpleGrid>
     </Flex>
-    <Button bg={'black'} color={'white'} _hover={{bg:'grey', color:"black"}}>View all</Button>
+    <Button bg={'black'} color={'white'} _hover={{bg:'grey', color:"black"}} onClick={handleViewAll}>View all</Button>
     </>
 </div>
 );
 };
 
 export default ArtistEdits;
+
+

@@ -206,13 +206,13 @@ const MobileNavItem = ({ label, children, href }) => {
         href={href ?? '#'}
         justify={'space-between'}
         align={'center'}
-        // color={'black'}
+        color={'white'}
         _hover={{
           textDecoration: 'none',
         }}>
         <Text
           fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}>
+          color={useColorModeValue('white', 'white')}>
           {label}
         </Text>
         {children && (
@@ -232,11 +232,11 @@ const MobileNavItem = ({ label, children, href }) => {
           pl={4}
           borderLeft={1}
           borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
+          borderColor={useColorModeValue('white', 'white')}
           align={'start'}>
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link key={child.label} color={'white'} py={2} href={child.href}>
                 {child.label}
               </Link>
             ))}

@@ -23,7 +23,6 @@ setIndex(newIndex >= length ? 0 : newIndex);
 
  return (
 <div className="carousel" style={{color:'black'}} >
-    <br />
     <>
     <Heading fontFamily={'SF-Heading-font'} pt='45px' fontWeight={'400'} textDecoration={'underline'}>Sneaker Edit</Heading>
     <Flex mr={'20px'} alignItems={'center'} ml={'20px'} justify={'space-between'}>

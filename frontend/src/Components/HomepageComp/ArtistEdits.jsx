@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading, IconButton, Image, SimpleGrid, Text, scroll, useBreakpointValue } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 import {Link} from "react-scroll"
 
 const ArtistEdits= () => {
@@ -16,6 +17,12 @@ setIndex(val);
 const handleNext = (val) => {
 setIndex(val);
 };
+
+const navigate=useNavigate();
+
+const handleViewAll=()=>{
+    navigate('/products')
+}
 
  return (
 <div className="carousel" style={{color:'black'}}>
@@ -42,7 +49,7 @@ setIndex(val);
         <Flex justify={'space-between'} padding={'15px'} alignItems={'center'}>
         <Heading textAlign={'left'}  fontSize={'16px'} color={'black'}>{el.name}</Heading>
         <IconButton bg={'black'}>
-       <Button color="red" _hover={{color:'white',backgroundColor:'teal'}} onClick={handleNext}><BiRightArrowAlt fontSize={'20px'}/></Button>
+       <Button color="red" _hover={{color:'white',backgroundColor:'teal'}}><BiRightArrowAlt fontSize={'20px'}/></Button>
        </IconButton>
         </Flex>
         <Heading pl={'15px'} pb={'10px'} textAlign={'left'}  fontSize={'14px'} color={'grey'}>Rs. {el.price}.00</Heading>
@@ -50,10 +57,12 @@ setIndex(val);
        ))}
     </SimpleGrid>
     </Flex>
-    <Button bg={'black'} color={'white'} _hover={{bg:'grey', color:"black"}}>View all</Button>
+    <Button bg={'black'} color={'white'} _hover={{bg:'grey', color:"black"}} onClick={handleViewAll}>View all</Button>
     </>
 </div>
 );
 };
 
 export default ArtistEdits;
+
+

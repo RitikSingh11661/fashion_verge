@@ -13,12 +13,16 @@ export const Homepage = () => {
   return (
     <div>
       <Carousel/>
+      <br />
       <ItemsCarousel />
       <MensCarousel />
       <NewArrivals />
       <TrendingNow/>
+      <br />
       <ArtistEdits/>
+      <br />
       <SneakerEdit/>
+      <br />
       <Brands/>
       <DeliveryPattern/>
     </div>
